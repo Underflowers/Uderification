@@ -1,4 +1,4 @@
-package io.avalia.fruits.configuration;
+package io.underflowers.underification.configuration;
 
 import com.fasterxml.jackson.core.type.ResolvedType;
 import org.springframework.context.annotation.Bean;

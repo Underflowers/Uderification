@@ -1,6 +1,6 @@
-package io.avalia.fruits.api.spec.helpers;
+package io.underflowers.underification.api.spec.helpers;
 
-import io.avalia.fruits.api.DefaultApi;
+import io.underflowers.underification.api.DefaultApi;
 
 import java.io.IOException;
 import java.util.Properties;

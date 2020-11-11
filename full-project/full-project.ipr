@@ -42,6 +42,11 @@
         <option value="$PROJECT_DIR$/../fruits-impl/pom.xml" />
       </list>
     </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$PROJECT_DIR$/../uderification-impl/pom.xml" />
+      </set>
+    </option>
   </component>
   <component name="ProjectModuleManager">
     <modules>

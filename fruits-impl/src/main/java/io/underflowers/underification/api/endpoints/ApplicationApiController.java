@@ -32,6 +32,13 @@ public class ApplicationApiController implements ApplicationsApi {
     ApplicationRepository applicationRepository;
 
     public ResponseEntity<List<Application>> getApplications() {
+        ApplicationEntity entity = new ApplicationEntity();
+        entity.setName("Stackunderflow");
+        entity.setDescription("Awesome stuff");
+        entity.setUrl("flow.io");
+        entity.setToken("1234");
+        applicationRepository.save(entity);
+
         List<Application> applications = new ArrayList<>();
         for (ApplicationEntity applicationEntity : applicationRepository.findAll())
             applications.add(toApplication(applicationEntity));
@@ -48,6 +55,9 @@ public class ApplicationApiController implements ApplicationsApi {
     private  Application toApplication(ApplicationEntity entity) {
         Application application = new Application();
         application.setName(entity.getName());
+        application.setDescription(entity.getDescription());
+        application.setUrl(entity.getUrl());
+        application.setToken(entity.getToken());
         return application;
     }
 }

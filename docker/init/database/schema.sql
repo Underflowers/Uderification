@@ -18,29 +18,29 @@ USE `underification` ;
 -- -----------------------------------------------------
 -- Table `applications`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `applications` ;
+-- DROP TABLE IF EXISTS `applications` ;
 
-CREATE TABLE IF NOT EXISTS `applications` (
-  `id` INTEGER NOT NULL,
-  `name` VARCHAR(255) NOT NULL,
-  `url` VARCHAR(255) NOT NULL,
-  `description` TEXT NOT NULL,
+-- CREATE TABLE IF NOT EXISTS `applications` (
+--   `id` INTEGER NOT NULL,
+--   `name` VARCHAR(255) NOT NULL,
+--   `url` VARCHAR(255) NOT NULL,
+--   `description` TEXT NOT NULL,
 
-  `token` VARCHAR(255) NOT NULL,
+--   `token` VARCHAR(255) NOT NULL,
 
-  PRIMARY KEY (`id`)
-) ENGINE = InnoDB;
+--   PRIMARY KEY (`id`)
+-- ) ENGINE = InnoDB;
 
--- -----------------------------------------------------
--- Table `badges`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `badges` ;
+-- -- -----------------------------------------------------
+-- -- Table `badges`
+-- -- -----------------------------------------------------
+-- DROP TABLE IF EXISTS `badges` ;
 
-CREATE TABLE IF NOT EXISTS `badges` (
-  `id` INTEGER NOT NULL,
-  `name` VARCHAR(255) NOT NULL,
-  `image` VARCHAR(255) NOT NULL,
-  `description` TEXT NOT NULL,
+-- CREATE TABLE IF NOT EXISTS `badges` (
+--   `id` INTEGER NOT NULL,
+--   `name` VARCHAR(255) NOT NULL,
+--   `image` VARCHAR(255) NOT NULL,
+--   `description` TEXT NOT NULL,
 
-  PRIMARY KEY (`id`)
-) ENGINE = InnoDB;
+--   PRIMARY KEY (`id`)
+-- ) ENGINE = InnoDB;

@@ -1,0 +1,19 @@
+version: "3.7"
+services:
+  underification_db:
+    image: mysql:8.0.21
+    container_name: underification_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: securepassword
+      MYSQL_DATABASE: underification
+      MYSQL_USER: underflower
+      MYSQL_PASSWORD: securepassword
+    ports:
+      - "3307:3306"
+    volumes:
+      - ./docker/init/database/:/docker-entrypoint-initdb.d/
+      - stackunderflow_db:/var/lib/mysql
+
+volumes:
+  stackunderflow_db:

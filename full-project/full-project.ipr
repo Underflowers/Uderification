@@ -18,6 +18,14 @@
       <module name="swagger-spring" target="11" />
     </bytecodeTargetLevel>
   </component>
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="Underification DB" uuid="cdfdefbb-282c-4c38-89c5-c3ba9e82fce3">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://localhost:3307</jdbc-url>
+    </data-source>
+  </component>
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/../fruits-impl/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/../fruits-impl/src/main/resources" charset="UTF-8" />
@@ -77,6 +85,22 @@
   </component>
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$/.." vcs="Git" />
+  </component>
+  <component name="dataSourceStorageLocal">
+    <data-source name="Underification DB" uuid="cdfdefbb-282c-4c38-89c5-c3ba9e82fce3">
+      <database-info product="MySQL" version="8.0.21" jdbc-version="4.2" driver-name="MySQL Connector/J" driver-version="mysql-connector-java-8.0.21 (Revision: 33f65445a1bcc544eb0120491926484da168f199)" dbms="MYSQL" exact-version="8.0.21" exact-driver-version="8.0">
+        <extra-name-characters>#@</extra-name-characters>
+        <identifier-quote-string>`</identifier-quote-string>
+      </database-info>
+      <case-sensitivity plain-identifiers="exact" quoted-identifiers="exact" />
+      <secret-storage>master_key</secret-storage>
+      <user-name>underflower</user-name>
+      <schema-mapping>
+        <introspection-scope>
+          <node kind="schema" qname="@" />
+        </introspection-scope>
+      </schema-mapping>
+    </data-source>
   </component>
   <component name="libraryTable">
     <library name="Maven: antlr:antlr:2.7.7">

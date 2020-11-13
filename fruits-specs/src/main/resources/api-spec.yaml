@@ -7,6 +7,19 @@ security:
   #  - bearerAuth: []
   - apiKeyAuth: []
 paths:
+  /applications:
+    get:
+      description: get the list of all fruits
+      operationId: getApplications
+      responses:
+        '200':
+          description: success
+          content:
+            'application/json':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Application'
   /fruits:
     post:
       description: create a fruit
@@ -77,3 +90,8 @@ components:
         expirationDateTime:
           type: string
           format: date-time
+    Application:
+      type: object
+      properties:
+        name:
+          type: string

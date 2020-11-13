@@ -6,8 +6,10 @@
 {
     name: <name>,
     url: <url>,
-    apitoken: <token>,
     description: <description>
+}
+returns {
+    apitoken: <token>,
 }
 
 /badges POST créé un badge

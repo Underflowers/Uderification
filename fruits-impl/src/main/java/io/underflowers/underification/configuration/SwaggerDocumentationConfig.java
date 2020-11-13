@@ -1,4 +1,4 @@
-package io.avalia.fruits.configuration;
+package io.underflowers.underification.configuration;
 
 import com.fasterxml.jackson.core.type.ResolvedType;
 import org.springframework.context.annotation.Bean;
@@ -39,7 +39,7 @@ public class SwaggerDocumentationConfig {
     public Docket customImplementation(){
         return new Docket(DocumentationType.OAS_30)
             .select()
-                .apis(RequestHandlerSelectors.basePackage("io.avalia.fruits.api"))
+                .apis(RequestHandlerSelectors.basePackage("io.underflowers.underification.api"))
                 .build()
             .directModelSubstitute(Void.class, Void.class)
             .securitySchemes(singletonList(securityScheme()))

@@ -1,4 +1,4 @@
-package io.avalia.fruits.api.exceptions;
+package io.underflowers.underification.api.exceptions;
 
 public class NotFoundException extends ApiException {
     private int code;

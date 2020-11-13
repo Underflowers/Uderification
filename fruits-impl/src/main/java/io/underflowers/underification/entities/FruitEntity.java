@@ -1,4 +1,4 @@
-package io.avalia.fruits.entities;
+package io.underflowers.underification.entities;
 
 import lombok.Data;
 

@@ -36,6 +36,35 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Application'
+  /badges:
+    post:
+      description: Create a new badge
+      operationId: createBadge
+      requestBody:
+        content:
+          'application/json':
+            schema:
+              $ref: '#/components/schemas/Badge'
+      responses:
+        '201':
+          description: success
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/Badge'
+
+    get:
+      description: get the list of all badges
+      operationId: getBadges
+      responses:
+        '200':
+          description: success
+          content:
+            'application/json':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Badge'
   /fruits:
     post:
       description: create a fruit
@@ -130,4 +159,13 @@ components:
       type: object
       properties:
         token:
+          type: string
+    Badge:
+      type: object
+      properties:
+        name:
+          type: string
+        image:
+          type: string
+        description:
           type: string

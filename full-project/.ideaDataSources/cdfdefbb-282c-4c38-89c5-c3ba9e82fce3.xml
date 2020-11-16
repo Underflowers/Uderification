@@ -923,10 +923,24 @@
       <Position>4</Position>
       <DataType>varchar(255)|0s</DataType>
     </column>
-    <key id="289" parent="278" name="PRIMARY">
+    <column id="289" parent="278" name="application_id">
+      <Position>5</Position>
+      <DataType>bigint|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="290" parent="278" name="FKd9hfwrn2g5ib7vba7pqx8fhki">
+      <ColNames>application_id</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="291" parent="278" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
+    <foreign-key id="292" parent="278" name="FKd9hfwrn2g5ib7vba7pqx8fhki">
+      <ColNames>application_id</ColNames>
+      <RefTableName>application_entity</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
   </database-model>
 </dataSource>

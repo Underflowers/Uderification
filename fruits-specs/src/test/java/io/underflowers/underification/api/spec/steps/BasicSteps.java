@@ -4,13 +4,8 @@ import io.underflowers.underification.ApiException;
 import io.underflowers.underification.ApiResponse;
 import io.underflowers.underification.api.DefaultApi;
 import io.underflowers.underification.api.spec.helpers.Environment;
-import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
-
-import java.time.LocalDate;
-import java.time.OffsetDateTime;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -47,7 +42,7 @@ public class BasicSteps {
     public void iReceiveAStatusCodeWithALocationHeader(int arg0) {
     }
 
-    private void processApiResponse(ApiResponse apiResponse) {
+    public void processApiResponse(ApiResponse apiResponse) { // TODO changed to public, ok?
         lastApiResponse = apiResponse;
         lastApiCallThrewException = false;
         lastApiException = null;
@@ -56,7 +51,7 @@ public class BasicSteps {
         lastReceivedLocationHeader = locationHeaderValues != null ? locationHeaderValues.get(0) : null;
     }
 
-    private void processApiException(ApiException apiException) {
+    public void processApiException(ApiException apiException) {
         lastApiCallThrewException = true;
         lastApiResponse = null;
         lastApiException = apiException;

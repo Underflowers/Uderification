@@ -1,8 +1,6 @@
 package io.underflowers.underification.api.spec.steps;
 
-import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
-import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.underflowers.underification.ApiException;
 import io.underflowers.underification.ApiResponse;
@@ -10,14 +8,10 @@ import io.underflowers.underification.api.DefaultApi;
 import io.underflowers.underification.api.dto.Application;
 import io.underflowers.underification.api.spec.helpers.Environment;
 
-import java.util.List;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-
 public class ApplicationSteps {
 
     private Environment environment;
+    private BasicSteps basicSteps;
     private DefaultApi api;
 
     Application application;
@@ -25,13 +19,13 @@ public class ApplicationSteps {
     private ApiResponse lastApiResponse;
     private ApiException lastApiException;
     private boolean lastApiCallThrewException;
-    private int lastStatusCode;
 
-    private String lastReceivedLocationHeader;
     private Application lastReceivedApplication;
 
-    public ApplicationSteps(Environment environment) {
+    public ApplicationSteps(Environment environment, BasicSteps basicSteps) {
         this.environment = environment;
+        this.basicSteps = basicSteps;
+
         this.api = environment.getApi();
     }
 
@@ -55,9 +49,9 @@ public class ApplicationSteps {
     public void iSendAGETToTheApplicationsEndpoint() {
         try {
             lastApiResponse = api.getApplicationsWithHttpInfo();
-            processApiResponse(lastApiResponse);
+            basicSteps.processApiResponse(lastApiResponse);
         } catch (ApiException e) {
-            processApiException(e);
+            basicSteps.processApiException(e);
         }
     }
 
@@ -73,24 +67,8 @@ public class ApplicationSteps {
         }
     }*/
 
-    @And("I receive a payload that is the same as the application payload")
+    /*@And("I receive a payload that is the same as the application payload")
     public void iReceiveAPayloadThatIsTheSameAsTheApplicationPayload() {
         assertEquals(application, lastReceivedApplication);
-    }
-
-    private void processApiResponse(ApiResponse apiResponse) {
-        lastApiResponse = apiResponse;
-        lastApiCallThrewException = false;
-        lastApiException = null;
-        lastStatusCode = lastApiResponse.getStatusCode();
-        List<String> locationHeaderValues = (List<String>)lastApiResponse.getHeaders().get("Location");
-        lastReceivedLocationHeader = locationHeaderValues != null ? locationHeaderValues.get(0) : null;
-    }
-
-    private void processApiException(ApiException apiException) {
-        lastApiCallThrewException = true;
-        lastApiResponse = null;
-        lastApiException = apiException;
-        lastStatusCode = lastApiException.getCode();
-    }
+    }*/
 }

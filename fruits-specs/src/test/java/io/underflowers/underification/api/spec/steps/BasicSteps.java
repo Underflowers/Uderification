@@ -58,6 +58,7 @@ public class BasicSteps {
         lastStatusCode = lastApiException.getCode();
     }
 
-
-
+    public String getLastReceivedLocationHeader() {
+        return lastReceivedLocationHeader;
+    }
 }

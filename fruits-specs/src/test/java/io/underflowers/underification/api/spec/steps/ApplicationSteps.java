@@ -1,5 +1,6 @@
 package io.underflowers.underification.api.spec.steps;
 
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 import io.underflowers.underification.ApiException;
@@ -7,6 +8,8 @@ import io.underflowers.underification.api.DefaultApi;
 import io.underflowers.underification.api.dto.Application;
 import io.underflowers.underification.api.dto.RegisteringApplication;
 import io.underflowers.underification.api.spec.helpers.Environment;
+
+import static org.junit.Assert.assertEquals;
 
 public class ApplicationSteps {
 
@@ -61,8 +64,8 @@ public class ApplicationSteps {
         }
     }*/
 
-    /*@And("I receive a payload that is the same as the application payload")
+    @And("I receive a payload that is the same as the application payload")
     public void iReceiveAPayloadThatIsTheSameAsTheApplicationPayload() {
         assertEquals(application, lastReceivedApplication);
-    }*/
+    }
 }

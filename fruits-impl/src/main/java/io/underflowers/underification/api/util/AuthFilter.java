@@ -28,18 +28,27 @@ public class AuthFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
 
+        // Explicit white list of URLs that don't need the auth with token
+        if(req.getRequestURI().equals("/") ||
+                req.getRequestURI().startsWith("/swagger") ||
+                req.getRequestURI().startsWith("/v3") ||
+                req.getRequestURI().startsWith("/applications")) {
+            chain.doFilter(request, response);
+            return;
+        }
+
         // Fetch API KEY from the header and fetch the associate applicationEntity
         String apiKey = req.getHeader("X-API-KEY");
         ApplicationEntity applicationEntity = applicationRepository.findByToken(apiKey);
         // Application does not exists => 401 error
-        /*if(applicationEntity == null){
+        if(applicationEntity == null){
             res.sendError(HttpServletResponse.SC_UNAUTHORIZED, "The token is not valid.");
         }
         // Application exists => attach it to the request and chain filter
-        else{*/
+        else{
             req.setAttribute("applicationEntity", applicationEntity);
             chain.doFilter(request, response);
-        //}
+        }
     }
 
     @Override

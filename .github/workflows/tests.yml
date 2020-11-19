@@ -39,7 +39,7 @@ jobs:
       - name: Run Cucumber tests
         run: |
           cd fruits-specs
-          mvn test
+          mvn clean test
 
       - name: Stop servers
         run: |

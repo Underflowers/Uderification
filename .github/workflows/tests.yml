@@ -34,7 +34,7 @@ jobs:
       - name: Start server
         run: |
           cd fruits-impl
-          mvn clean spring-boot:run
+          mvn clean spring-boot:start
 
       - name: Run Cucumber tests
         run: |
@@ -43,4 +43,5 @@ jobs:
 
       - name: Stop servers
         run: |
+          mvn spring-boot:stop
           docker-compose down

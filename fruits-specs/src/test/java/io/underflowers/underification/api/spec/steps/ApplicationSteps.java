@@ -16,10 +16,6 @@ public class ApplicationSteps {
 
     Application application;
 
-    private ApiResponse lastApiResponse;
-    private ApiException lastApiException;
-    private boolean lastApiCallThrewException;
-
     private Application lastReceivedApplication;
 
     public ApplicationSteps(Environment environment, BasicSteps basicSteps) {
@@ -39,17 +35,16 @@ public class ApplicationSteps {
     public void i_POST_the_fruit_payload_to_the_fruits_endpoint() throws Throwable {
         try {
             lastApiResponse = api.createApplicationWithHttpInfo(application);
-            processApiResponse(lastApiResponse);
+            basicSteps.processApiResponse(lastApiResponse);
         } catch (ApiException e) {
-            processApiException(e);
+            basicSteps.processApiException(e);
         }
     }*/
 
     @When("^I send a GET to the /applications endpoint$")
     public void iSendAGETToTheApplicationsEndpoint() {
         try {
-            lastApiResponse = api.getApplicationsWithHttpInfo();
-            basicSteps.processApiResponse(lastApiResponse);
+            basicSteps.processApiResponse(api.getApplicationsWithHttpInfo());
         } catch (ApiException e) {
             basicSteps.processApiException(e);
         }

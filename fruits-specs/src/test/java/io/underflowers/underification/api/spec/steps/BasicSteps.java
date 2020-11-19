@@ -42,7 +42,7 @@ public class BasicSteps {
     public void iReceiveAStatusCodeWithALocationHeader(int arg0) {
     }
 
-    public void processApiResponse(ApiResponse apiResponse) { // TODO changed to public, ok?
+    public void processApiResponse(ApiResponse apiResponse) {
         lastApiResponse = apiResponse;
         lastApiCallThrewException = false;
         lastApiException = null;
@@ -57,5 +57,7 @@ public class BasicSteps {
         lastApiException = apiException;
         lastStatusCode = lastApiException.getCode();
     }
+
+
 
 }

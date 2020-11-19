@@ -34,7 +34,7 @@ jobs:
       - name: Start server
         run: |
           cd fruits-impl
-          mvn clean spring-boot:start
+          mvn clean compile spring-boot:start
 
       - name: Run Cucumber tests
         run: |

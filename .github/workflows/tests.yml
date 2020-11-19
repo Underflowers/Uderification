@@ -28,6 +28,9 @@ jobs:
 
       - uses: actions/checkout@v2
 
+      - name: Start database
+        run: docker-compose up -d underification_db
+
       - name: Start server
         run: |
           cd fruits-impl

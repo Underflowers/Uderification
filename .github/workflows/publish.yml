@@ -54,7 +54,7 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ghcr.io/underflowers/underification:testing
+          tags: ghcr.io/underflowers/underification:latest
           build-args: |
             DEPENDENCY=./fruits-impl/target/dependency
 

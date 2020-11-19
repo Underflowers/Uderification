@@ -3,9 +3,9 @@ package io.underflowers.underification.api.spec.steps;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 import io.underflowers.underification.ApiException;
-import io.underflowers.underification.ApiResponse;
 import io.underflowers.underification.api.DefaultApi;
 import io.underflowers.underification.api.dto.Application;
+import io.underflowers.underification.api.dto.RegisteringApplication;
 import io.underflowers.underification.api.spec.helpers.Environment;
 
 public class ApplicationSteps {
@@ -14,7 +14,7 @@ public class ApplicationSteps {
     private BasicSteps basicSteps;
     private DefaultApi api;
 
-    Application application;
+    RegisteringApplication application;
 
     private Application lastReceivedApplication;
 
@@ -27,19 +27,18 @@ public class ApplicationSteps {
 
     @Given("I have an application payload")
     public void i_have_an_application_payload() throws Throwable {
-        application = new Application()
+        application = new RegisteringApplication()
                 .name("My Application");
     }
 
-    /*@When("^I POST the fruit payload to the /applications endpoint$")
-    public void i_POST_the_fruit_payload_to_the_fruits_endpoint() throws Throwable {
+    @When("^I POST the application payload to the /applications endpoint$")
+    public void i_POST_the_application_payload_to_the_applications_endpoint() throws Throwable {
         try {
-            lastApiResponse = api.createApplicationWithHttpInfo(application);
-            basicSteps.processApiResponse(lastApiResponse);
+            basicSteps.processApiResponse(api.registerApplicationWithHttpInfo(application));
         } catch (ApiException e) {
             basicSteps.processApiException(e);
         }
-    }*/
+    }
 
     @When("^I send a GET to the /applications endpoint$")
     public void iSendAGETToTheApplicationsEndpoint() {

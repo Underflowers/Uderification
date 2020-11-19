@@ -15,5 +15,19 @@ services:
       - ./docker/init/database/:/docker-entrypoint-initdb.d/
       - stackunderflow_db:/var/lib/mysql
 
+
+  web:
+    image: ghcr.io/underflowers/underification:latest
+    container_name: underification
+    ports:
+      - "8080:8080"
+    environment:
+      MYSQL_HOST: underification_db
+      MYSQL_PORT: 3306
+      MYSQL_USER: underflower
+      MYSQL_PASSWORD: securepassword
+    depends_on:
+      - underification_db
+
 volumes:
   stackunderflow_db:

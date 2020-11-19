@@ -5,6 +5,7 @@
 You can use maven to build and run the REST API implementation from the command line. After invoking the following maven goal, the Spring Boot server will be up and running, listening for connections on port 8080.
 
 ```
+docker-compose up -d underification_db
 cd fruits-impl/
 mvn spring-boot:run
 ```
@@ -44,4 +45,14 @@ cd cd fruits-specs/
 mvn clean test
 ```
 You will see the test results in the console, but you can also open the file located in `./target/cucumber`
+
+# Deployment 
+
+As always and for the rest of our lives, we provide a beautiful handcrafted docker image.
+
+Just run:
+
+`docker-compose up -d`
+
+> Note: You may want to change the database credentials in the compose file for obvious security purposes.
 

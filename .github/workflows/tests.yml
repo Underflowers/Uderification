@@ -1,0 +1,51 @@
+name: Tests 
+on: 
+  push:
+    branches:
+      - '*'
+      # we don't want to run test suit when pushing to master 
+      #   since it will only contain production ready code!
+      - '!master'
+  pull_request:
+    branches: [ develop ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Setup JDK 11
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+
+      - uses: actions/cache@v1
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+
+      - uses: actions/checkout@v2
+
+      - name: Start database
+        run: docker-compose up -d underification_db
+
+      - name: Start server
+        run: |
+          cd fruits-impl
+          mvn clean compile spring-boot:start
+
+      - name: Run Cucumber tests
+        run: |
+          cd fruits-specs
+          mvn clean test
+
+      - name: Stop server
+        run: |
+          cd fruits-impl
+          mvn spring-boot:stop
+
+      - name: Stop database
+        run: |
+          docker-compose down

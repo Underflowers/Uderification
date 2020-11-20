@@ -7,21 +7,29 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="fruits-specs" />
-        <module name="fruits-impl" />
+        <module name="api-specs" />
+        <module name="api-impl" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="fruits-impl" target="11" />
-      <module name="fruits-specs" target="11" />
+      <module name="api-impl" target="11" />
+      <module name="api-specs" target="11" />
       <module name="fruitsSpecification" target="11" />
       <module name="swagger-spring" target="11" />
     </bytecodeTargetLevel>
   </component>
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="Underification DB" uuid="cdfdefbb-282c-4c38-89c5-c3ba9e82fce3">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://localhost:3307/underification</jdbc-url>
+    </data-source>
+  </component>
   <component name="Encoding">
-    <file url="file://$PROJECT_DIR$/../fruits-impl/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/../fruits-impl/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/../fruits-specs/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../api-impl/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../api-impl/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../api-specs/src/main/resources" charset="UTF-8" />
   </component>
   <component name="InspectionProjectProfileManager">
     <profile version="1.0">
@@ -31,7 +39,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="fruits-impl" options="-parameters" />
+      <module name="api-impl" options="-parameters" />
       <module name="swagger-spring" options="-parameters" />
     </option>
   </component>
@@ -50,8 +58,8 @@
   </component>
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/../fruits-impl/fruits-impl.iml" filepath="$PROJECT_DIR$/../fruits-impl/fruits-impl.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../fruits-specs/fruits-specs.iml" filepath="$PROJECT_DIR$/../fruits-specs/fruits-specs.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../api-impl/api-impl.iml" filepath="$PROJECT_DIR$/../api-impl/api-impl.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../api-specs/api-specs.iml" filepath="$PROJECT_DIR$/../api-specs/api-specs.iml" />
       <module fileurl="file://$PROJECT_DIR$/full-project.iml" filepath="$PROJECT_DIR$/full-project.iml" />
     </modules>
   </component>
@@ -77,6 +85,25 @@
   </component>
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$/.." vcs="Git" />
+  </component>
+  <component name="dataSourceStorageLocal">
+    <data-source name="Underification DB" uuid="cdfdefbb-282c-4c38-89c5-c3ba9e82fce3">
+      <database-info product="MySQL" version="8.0.21" jdbc-version="4.2" driver-name="MySQL Connector/J" driver-version="mysql-connector-java-8.0.21 (Revision: 33f65445a1bcc544eb0120491926484da168f199)" dbms="MYSQL" exact-version="8.0.21" exact-driver-version="8.0">
+        <extra-name-characters>#@</extra-name-characters>
+        <identifier-quote-string>`</identifier-quote-string>
+      </database-info>
+      <case-sensitivity plain-identifiers="exact" quoted-identifiers="exact" />
+      <secret-storage>master_key</secret-storage>
+      <user-name>underflower</user-name>
+      <schema-mapping>
+        <introspection-scope>
+          <node kind="schema">
+            <name qname="@" />
+            <name qname="underification" />
+          </node>
+        </introspection-scope>
+      </schema-mapping>
+    </data-source>
   </component>
   <component name="libraryTable">
     <library name="Maven: antlr:antlr:2.7.7">
@@ -750,6 +777,17 @@
         <root url="jar://$MAVEN_REPOSITORY$/junit/junit/4.13.1/junit-4.13.1-sources.jar!/" />
       </SOURCES>
     </library>
+    <library name="Maven: mysql:mysql-connector-java:8.0.22">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/mysql/mysql-connector-java/8.0.22/mysql-connector-java-8.0.22.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/mysql/mysql-connector-java/8.0.22/mysql-connector-java-8.0.22-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/mysql/mysql-connector-java/8.0.22/mysql-connector-java-8.0.22-sources.jar!/" />
+      </SOURCES>
+    </library>
     <library name="Maven: net.bytebuddy:byte-buddy:1.10.17">
       <CLASSES>
         <root url="jar://$MAVEN_REPOSITORY$/net/bytebuddy/byte-buddy/1.10.17/byte-buddy-1.10.17.jar!/" />
@@ -759,6 +797,17 @@
       </JAVADOC>
       <SOURCES>
         <root url="jar://$MAVEN_REPOSITORY$/net/bytebuddy/byte-buddy/1.10.17/byte-buddy-1.10.17-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: org.apache.commons:commons-lang3:3.9">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/apache/commons/commons-lang3/3.9/commons-lang3-3.9.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/org/apache/commons/commons-lang3/3.9/commons-lang3-3.9-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/apache/commons/commons-lang3/3.9/commons-lang3-3.9-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="Maven: org.apache.logging.log4j:log4j-api:2.13.3">

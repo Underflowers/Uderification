@@ -1,0 +1,33 @@
+version: "3.7"
+services:
+  underification_db:
+    image: mysql:8.0.21
+    container_name: underification_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: securepassword
+      MYSQL_DATABASE: underification
+      MYSQL_USER: underflower
+      MYSQL_PASSWORD: securepassword
+    ports:
+      - "3307:3306"
+    volumes:
+      - ./docker/init/database/:/docker-entrypoint-initdb.d/
+      - underification_db:/var/lib/mysql
+
+
+  underification_api:
+    image: ghcr.io/underflowers/underification:latest
+    container_name: underification
+    ports:
+      - "8080:8080"
+    environment:
+      MYSQL_HOST: underification_db
+      MYSQL_PORT: 3306
+      MYSQL_USER: underflower
+      MYSQL_PASSWORD: securepassword
+    depends_on:
+      - underification_db
+
+volumes:
+  underification_db:

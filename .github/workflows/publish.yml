@@ -32,7 +32,7 @@ jobs:
               
       - name: Build with maven
         run: |
-          cd fruits-impl
+          cd api-impl
           mvn clean package
         
       - name: Set up Docker build
@@ -56,5 +56,5 @@ jobs:
           push: true
           tags: ghcr.io/underflowers/underification:latest
           build-args: |
-            DEPENDENCY=./fruits-impl/target/dependency
+            DEPENDENCY=./api-impl/target/dependency
 

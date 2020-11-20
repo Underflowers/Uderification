@@ -13,10 +13,10 @@ services:
       - "3307:3306"
     volumes:
       - ./docker/init/database/:/docker-entrypoint-initdb.d/
-      - stackunderflow_db:/var/lib/mysql
+      - underification_db:/var/lib/mysql
 
 
-  web:
+  underification_api:
     image: ghcr.io/underflowers/underification:latest
     container_name: underification
     ports:
@@ -30,4 +30,4 @@ services:
       - underification_db
 
 volumes:
-  stackunderflow_db:
+  underification_db:

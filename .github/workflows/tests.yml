@@ -33,17 +33,17 @@ jobs:
 
       - name: Start server
         run: |
-          cd fruits-impl
+          cd api-impl
           mvn clean compile spring-boot:start
 
       - name: Run Cucumber tests
         run: |
-          cd fruits-specs
+          cd api-specs
           mvn clean test
 
       - name: Stop server
         run: |
-          cd fruits-impl
+          cd api-impl
           mvn spring-boot:stop
 
       - name: Stop database

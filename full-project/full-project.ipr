@@ -7,13 +7,13 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="fruits-specs" />
+        <module name="api-specs" />
         <module name="api-impl" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="api-impl" target="11" />
-      <module name="fruits-specs" target="11" />
+      <module name="api-specs" target="11" />
       <module name="fruitsSpecification" target="11" />
       <module name="swagger-spring" target="11" />
     </bytecodeTargetLevel>
@@ -29,7 +29,7 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/../api-impl/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/../api-impl/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/../fruits-specs/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../api-specs/src/main/resources" charset="UTF-8" />
   </component>
   <component name="InspectionProjectProfileManager">
     <profile version="1.0">
@@ -59,7 +59,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/../api-impl/api-impl.iml" filepath="$PROJECT_DIR$/../api-impl/api-impl.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../fruits-specs/fruits-specs.iml" filepath="$PROJECT_DIR$/../fruits-specs/fruits-specs.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../api-specs/api-specs.iml" filepath="$PROJECT_DIR$/../api-specs/api-specs.iml" />
       <module fileurl="file://$PROJECT_DIR$/full-project.iml" filepath="$PROJECT_DIR$/full-project.iml" />
     </modules>
   </component>

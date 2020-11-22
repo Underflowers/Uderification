@@ -56,6 +56,7 @@ public class AuthFilter implements Filter {
 
         registrationBean.setFilter(new AuthFilter());
         registrationBean.addUrlPatterns("/badges/*");
+        registrationBean.addUrlPatterns("/pointScales/*");
 
         return registrationBean;
     }

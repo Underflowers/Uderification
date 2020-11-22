@@ -106,6 +106,36 @@ paths:
             'application/json':
               schema:
                 $ref: '#/components/schemas/Fruit'
+  /pointScales:
+    post:
+      description: Create a new point scale
+      operationId: createPointScale
+      requestBody:
+        content:
+          'application/json':
+            schema:
+              $ref: '#/components/schemas/PointScale'
+      responses:
+        '201':
+          description: success
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/PointScale'
+
+    get:
+      description: get the list of all point scales
+      operationId: getPointScales
+      responses:
+        '200':
+          description: success
+          content:
+            'application/json':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PointScale'
+
 components:
   securitySchemes:
     #    bearerAuth:            # arbitrary name for the security scheme
@@ -168,4 +198,9 @@ components:
         image:
           type: string
         description:
+          type: string
+    PointScale:
+      type: object
+      properties:
+        name:
           type: string

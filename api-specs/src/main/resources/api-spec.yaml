@@ -248,8 +248,8 @@ components:
     UserScore:
       type: object
       properties:
-        name:
-          type: string
+        userId:
+          type: int
         score:
           type: int
     LeaderBoard:

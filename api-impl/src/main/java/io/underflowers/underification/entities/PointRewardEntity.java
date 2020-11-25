@@ -16,4 +16,12 @@ public class PointRewardEntity implements Serializable {
 
     private int points;
     private LocalDateTime timestamp;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "point_scale_id", nullable=false)
+    private PointScaleEntity pointScale;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable=false)
+    private UserEntity application;
 }

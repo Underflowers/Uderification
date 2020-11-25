@@ -2,7 +2,11 @@ package io.underflowers.underification.api.endpoints;
 
 import io.underflowers.underification.api.LeaderBoardsApi;
 import io.underflowers.underification.api.model.LeaderBoard;
+import io.underflowers.underification.api.model.UserScore;
 import io.underflowers.underification.entities.ApplicationEntity;
+import io.underflowers.underification.repositories.FruitRepository;
+import io.underflowers.underification.repositories.PointRewardRepository;
+import io.underflowers.underification.repositories.projections.UserScoreProjection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -10,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import javax.servlet.ServletRequest;
 import javax.validation.Valid;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class LeaderBoardsApiController implements LeaderBoardsApi {
@@ -18,6 +23,9 @@ public class LeaderBoardsApiController implements LeaderBoardsApi {
 
     @Autowired
     ServletRequest request;
+
+    @Autowired
+    PointRewardRepository pointRewardRepository;
 
     public ResponseEntity<List<LeaderBoard>> getLeaderBoards(@Valid Integer limit){
         // TODO
@@ -29,14 +37,9 @@ public class LeaderBoardsApiController implements LeaderBoardsApi {
         limit = limit == null ? DEFAULT_LIMIT : limit;
         // Fetch the linked application from the token passed
         ApplicationEntity applicationEntity = (ApplicationEntity) request.getAttribute("applicationEntity");
-
-
-        // scaleId = SELECT id FROM pointScales WHERE name=pointScale AND applications_id=applicationEntity.id
-        // leaderBoard = SELECT users_id, COUNT(points) as score FROM points_rewards
-        // WHERE pointScales_id=scaleId
-        // GROUP BY users_id
-        // ORDER BY score DESC
-        // TODO: translate from SQL
-        return null;
+        // Retrieve leaders for the given point scale
+        List<UserScore> leaders = pointRewardRepository.findLeaders(applicationEntity.getId(), pointScale, limit).stream()
+                .map(u -> new UserScore().userId(u.getUserId()).score(u.getScore())).collect(Collectors.toList());
+        return ResponseEntity.ok(new LeaderBoard().pointScale(pointScale).leaders(leaders));
     }
 }

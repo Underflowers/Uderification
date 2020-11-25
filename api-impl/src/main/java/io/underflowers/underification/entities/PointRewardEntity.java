@@ -23,5 +23,5 @@ public class PointRewardEntity implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable=false)
-    private UserEntity application;
+    private UserEntity user;
 }

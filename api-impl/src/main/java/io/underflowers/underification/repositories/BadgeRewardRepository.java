@@ -1,10 +1,7 @@
 package io.underflowers.underification.repositories;
 
-import io.underflowers.underification.entities.PointScaleEntity;
-import io.underflowers.underification.entities.UserEntity;
+import io.underflowers.underification.entities.BadgeRewardEntity;
 import org.springframework.data.repository.CrudRepository;
 
-import java.util.List;
-
-public interface BadgeRewardRepository extends CrudRepository<PointScaleEntity, Long> {
+public interface BadgeRewardRepository extends CrudRepository<BadgeRewardEntity, Long> {
 }

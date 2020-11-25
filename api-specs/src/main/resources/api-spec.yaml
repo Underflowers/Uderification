@@ -106,6 +106,72 @@ paths:
             'application/json':
               schema:
                 $ref: '#/components/schemas/Fruit'
+  /pointScales:
+    post:
+      description: Create a new point scale
+      operationId: createPointScale
+      requestBody:
+        content:
+          'application/json':
+            schema:
+              $ref: '#/components/schemas/PointScale'
+      responses:
+        '201':
+          description: success
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/PointScale'
+
+    get:
+      description: get the list of all point scales
+      operationId: getPointScales
+      responses:
+        '200':
+          description: success
+          content:
+            'application/json':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PointScale'
+  /leaderBoards:
+    get:
+      description: Get all leader boards
+      operationId: getLeaderBoards
+      parameters:
+        -  in: query
+           name: limit
+           schema:
+             type: integer
+           description: The number of users to return in each leader board
+      responses:
+        '200':
+          description: success
+          content:
+            'application/json':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LeaderBoard'
+  /leaderBoards/{pointScale}:
+    get:
+      description: Get the leader board for the given point scale
+      operationId: getLeaderBoard
+      parameters:
+        - in: query
+          name: limit
+          schema:
+            type: integer
+          description: The number of users to return in the leader board
+      responses:
+        '200':
+          description: success
+          content:
+            'application/json':
+              schema:
+                  $ref: '#/components/schemas/LeaderBoard'
+
 components:
   securitySchemes:
     #    bearerAuth:            # arbitrary name for the security scheme
@@ -169,3 +235,24 @@ components:
           type: string
         description:
           type: string
+    PointScale:
+      type: object
+      properties:
+        name:
+          type: string
+    UserScore:
+      type: object
+      properties:
+        name:
+          type: string
+        score:
+          type: int
+    LeaderBoard:
+      type: object
+      properties:
+        pointScale:
+          type: string
+        leaders:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserScore'

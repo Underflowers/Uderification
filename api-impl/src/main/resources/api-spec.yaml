@@ -135,6 +135,42 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/PointScale'
+  /leaderBoards:
+    get:
+      description: Get all leader boards
+      operationId: getLeaderBoards
+      parameters:
+        -  in: query
+           name: limit
+           schema:
+             type: integer
+           description: The number of users to return in each leader board
+      responses:
+        '200':
+          description: success
+          content:
+            'application/json':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LeaderBoard'
+  /leaderBoards/{pointScale}:
+    get:
+      description: Get the leader board for the given point scale
+      operationId: getLeaderBoard
+      parameters:
+        - in: query
+          name: limit
+          schema:
+            type: integer
+          description: The number of users to return in the leader board
+      responses:
+        '200':
+          description: success
+          content:
+            'application/json':
+              schema:
+                  $ref: '#/components/schemas/LeaderBoard'
 
 components:
   securitySchemes:
@@ -204,3 +240,19 @@ components:
       properties:
         name:
           type: string
+    UserScore:
+      type: object
+      properties:
+        name:
+          type: string
+        score:
+          type: int
+    LeaderBoard:
+      type: object
+      properties:
+        pointScale:
+          type: string
+        leaders:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserScore'

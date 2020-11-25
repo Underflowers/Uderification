@@ -46,8 +46,8 @@
   <component name="MavenProjectsManager">
     <option name="originalFiles">
       <list>
-        <option value="$PROJECT_DIR$/../fruits-specs/pom.xml" />
-        <option value="$PROJECT_DIR$/../fruits-impl/pom.xml" />
+        <option value="$PROJECT_DIR$/../api-specs/pom.xml" />
+        <option value="$PROJECT_DIR$/../api-impl/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">

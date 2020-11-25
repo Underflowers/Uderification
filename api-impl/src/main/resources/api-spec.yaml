@@ -135,25 +135,6 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/PointScale'
-  /leaderBoards:
-    get:
-      description: Get all leader boards
-      operationId: getLeaderBoards
-      parameters:
-        -  in: query
-           name: limit
-           schema:
-             type: integer
-           description: The number of users to return in each leader board
-      responses:
-        '200':
-          description: success
-          content:
-            'application/json':
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/LeaderBoard'
   /leaderBoards/{pointScale}:
     get:
       description: Get the leader board for the given point scale

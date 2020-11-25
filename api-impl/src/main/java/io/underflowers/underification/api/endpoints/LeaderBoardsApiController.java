@@ -27,11 +27,6 @@ public class LeaderBoardsApiController implements LeaderBoardsApi {
     @Autowired
     PointRewardRepository pointRewardRepository;
 
-    public ResponseEntity<List<LeaderBoard>> getLeaderBoards(@Valid Integer limit){
-        // TODO
-        return null;
-    }
-
     @Override
     public ResponseEntity<LeaderBoard> getLeaderBoard(String pointScale, @Valid Integer limit) {
         limit = limit == null ? DEFAULT_LIMIT : limit;

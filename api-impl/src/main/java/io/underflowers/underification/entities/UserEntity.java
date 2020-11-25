@@ -2,10 +2,7 @@ package io.underflowers.underification.entities;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
@@ -17,4 +14,8 @@ public class UserEntity implements Serializable {
     private long id;
 
     private String appUserId;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "applications_id", nullable=false)
+    private ApplicationEntity application;
 }

@@ -135,6 +135,24 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/PointScale'
+  /rules:
+    post:
+      description: Create a new rule
+      operationId: createRule
+      requestBody:
+        content:
+          'application/json':
+            schema:
+              $ref: '#/components/schemas/Rule'
+      responses:
+        '201':
+          description: success
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/Rule'
+        '400':
+          description: Bad request, must have a valid badgeName OR valid scaleName + point
 
 components:
   securitySchemes:
@@ -204,3 +222,15 @@ components:
       properties:
         name:
           type: string
+    Rule:
+      type: object
+      properties:
+        eventType:
+          type: string
+        badgeName:
+          type: string
+        scaleName:
+          type: string
+        scalePoints:
+          type: int
+

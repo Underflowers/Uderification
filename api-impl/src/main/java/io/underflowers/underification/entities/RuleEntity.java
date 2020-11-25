@@ -24,4 +24,8 @@ public class RuleEntity implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "pointScales_id", nullable=true)
     private PointScaleEntity pointScale;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "applications_id", nullable=false)
+    private ApplicationEntity application;
 }

@@ -175,6 +175,24 @@ paths:
                 $ref: '#/components/schemas/Rule'
         '400':
           description: Bad request, must have a valid badgeName OR valid scaleName + point
+  /events:
+    post:
+      description: Trigger a new event
+      operationId: triggerEvent
+      requestBody:
+        content:
+          'application/json':
+            schema:
+              $ref: '#/components/schemas/Event'
+      responses:
+        '201':
+          description: success
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/Event'
+        '400':
+          description: Bad request, must have a valid badgeName OR valid scaleName + point
 
 components:
   securitySchemes:
@@ -271,4 +289,10 @@ components:
           type: string
         scalePoints:
           type: int
-
+    Event:
+      type: object
+      properties:
+        eventType:
+          type: string
+        appUserId:
+          type: string

@@ -76,6 +76,9 @@ public class RuleApiController implements RulesApi {
             ruleEntity.setAmount(rule.getScalePoints());
         }
 
+        // Don't forget to link the application
+        ruleEntity.setApplication(applicationEntity);
+
         return ruleEntity;
     }
 

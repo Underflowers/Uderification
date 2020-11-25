@@ -44,11 +44,8 @@ public class RuleApiController implements RulesApi {
     }
 
     private RuleEntity toRuleEntity(Rule rule) {
-        // Must have one of them, not both not nether of them
+        // Must have one of them or both
         if(rule.getBadgeName().isEmpty() && rule.getScaleName().isEmpty()){
-            return null;
-        }
-        if(!rule.getBadgeName().isEmpty() && !rule.getScaleName().isEmpty()){
             return null;
         }
 
@@ -58,7 +55,7 @@ public class RuleApiController implements RulesApi {
         ruleEntity.setEventType(rule.getEventType());
 
         // We have a badge name => check if exists in DB
-        if(rule.getScaleName().isEmpty()) {
+        if(!rule.getBadgeName().isEmpty()) {
             BadgeEntity badgeEntity = badgeRepository.findByNameAndApplication(rule.getBadgeName(), applicationEntity);
             if(badgeEntity == null){
                 return null;
@@ -69,7 +66,7 @@ public class RuleApiController implements RulesApi {
         }
 
         // We have a scale name and points => check if exists in DB
-        if(rule.getBadgeName().isEmpty() && rule.getScalePoints() != null) {
+        if(!rule.getScaleName().isEmpty() && rule.getScalePoints() != null) {
             PointScaleEntity pointScaleEntity = pointScaleRepository.findByNameAndApplication(rule.getScaleName(), applicationEntity);
             if(pointScaleEntity == null){
                 return null;

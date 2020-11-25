@@ -135,6 +135,28 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/PointScale'
+  /leaderBoards/{pointScale}:
+    get:
+      description: Get the leader board for the given point scale
+      operationId: getLeaderBoard
+      parameters:
+        - in: path
+          name: pointScale
+          schema:
+            type: string
+          required: true
+        - in: query
+          name: limit
+          schema:
+            type: integer
+          description: The number of users to return in the leader board
+      responses:
+        '200':
+          description: success
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/LeaderBoard'
   /rules:
     post:
       description: Create a new rule
@@ -222,6 +244,22 @@ components:
       properties:
         name:
           type: string
+    UserScore:
+      type: object
+      properties:
+        userId:
+          type: int
+        score:
+          type: int
+    LeaderBoard:
+      type: object
+      properties:
+        pointScale:
+          type: string
+        leaders:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserScore'
     Rule:
       type: object
       properties:

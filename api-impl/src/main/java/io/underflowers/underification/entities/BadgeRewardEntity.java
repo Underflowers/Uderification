@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Data
-public class BadgeAwardEntity {
+public class BadgeRewardEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

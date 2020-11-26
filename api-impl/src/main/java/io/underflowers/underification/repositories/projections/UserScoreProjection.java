@@ -1,6 +1,6 @@
 package io.underflowers.underification.repositories.projections;
 
 public interface UserScoreProjection {
-    int getUserId();
+    String getUserId();
     int getScore();
 }

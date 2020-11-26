@@ -266,7 +266,7 @@ components:
       type: object
       properties:
         userId:
-          type: int
+          type: string
         score:
           type: int
     LeaderBoard:

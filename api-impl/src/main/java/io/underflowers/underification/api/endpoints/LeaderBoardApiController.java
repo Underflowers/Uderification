@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Controller
-public class LeaderBoardsApiController implements LeaderBoardsApi {
+public class LeaderBoardApiController implements LeaderBoardsApi {
 
     static private final Integer DEFAULT_LIMIT = 10;
 
@@ -38,6 +38,7 @@ public class LeaderBoardsApiController implements LeaderBoardsApi {
         // Fetch the linked application from the token passed
         ApplicationEntity applicationEntity = (ApplicationEntity) request.getAttribute("applicationEntity");
 
+        // point scale doesn't exist for the given application
         if (pointScaleRepository.findByNameAndApplication(pointScale, applicationEntity) == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }

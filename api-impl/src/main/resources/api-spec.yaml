@@ -65,6 +65,25 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Badge'
+  /users/{user}/badges:
+    get:
+      description: get badges earned by a user
+      operationId: getUserBadges
+      parameters:
+        - in: path
+          name: user
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: success
+          content:
+            'application/json':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Badge'
   /fruits:
     post:
       description: create a fruit

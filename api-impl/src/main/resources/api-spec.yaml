@@ -65,21 +65,16 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Badge'
-  /fruits:
-    post:
-      description: create a fruit
-      operationId: createFruit
-      requestBody:
-        content:
-          'application/json':
-            schema:
-              $ref: '#/components/schemas/Fruit'
-      responses:
-        '201':
-          description: created
+  /users/{user}/badges:
     get:
-      description: get the list of all fruits
-      operationId: getFruits
+      description: get badges earned by a user
+      operationId: getUserBadges
+      parameters:
+        - in: path
+          name: user
+          schema:
+            type: string
+          required: true
       responses:
         '200':
           description: success
@@ -88,24 +83,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Fruit'
-  /fruits/{id}:
-    get:
-      description: get one fruit, by id
-      operationId: getFruit
-      parameters:
-        - in: path
-          name: id
-          schema:
-            type: integer
-          required: true
-      responses:
-        '200':
-          description: success
-          content:
-            'application/json':
-              schema:
-                $ref: '#/components/schemas/Fruit'
+                  $ref: '#/components/schemas/Badge'
   /pointScales:
     post:
       description: Create a new point scale

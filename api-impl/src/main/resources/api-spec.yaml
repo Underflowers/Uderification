@@ -165,10 +165,6 @@ paths:
       responses:
         '201':
           description: success
-          content:
-            'application/json':
-              schema:
-                $ref: '#/components/schemas/Event'
         '400':
           description: Bad request, must have a valid eventType
 

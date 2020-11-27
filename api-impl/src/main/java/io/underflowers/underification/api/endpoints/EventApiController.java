@@ -77,7 +77,7 @@ public class EventApiController implements EventsApi {
 
         }
 
-        return new ResponseEntity<>(event, HttpStatus.CREATED);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
 

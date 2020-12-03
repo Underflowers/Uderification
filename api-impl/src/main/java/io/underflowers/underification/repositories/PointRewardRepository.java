@@ -9,7 +9,7 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface PointRewardRepository extends CrudRepository<PointRewardEntity, Long> {
-    @Query (value = "SELECT U.app_user_id AS userId, SUM(R.points) AS score\n" +
+    @Query (value = "SELECT U.app_user_id AS appUserId, SUM(R.points) AS score\n" +
             "FROM point_reward_entity AS R\n" +
             "INNER JOIN user_entity as U ON R.user_id = U.id\n" +
             "INNER JOIN point_scale_entity AS S ON R.point_scale_id = S.id\n" +

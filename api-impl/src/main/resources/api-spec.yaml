@@ -113,7 +113,7 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/PointScale'
-  /leaderBoards/{pointScale}:
+  /pointScales/{pointScale}/leaderBoard:
     get:
       description: Get the leader board for the given point scale
       operationId: getLeaderBoard
@@ -123,6 +123,7 @@ paths:
           schema:
             type: string
           required: true
+          description: Name of the point scale in the application
         - in: query
           name: limit
           schema:
@@ -239,7 +240,7 @@ components:
     UserScore:
       type: object
       properties:
-        userId:
+        appUserId:
           type: string
         score:
           type: int

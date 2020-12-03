@@ -33,7 +33,7 @@ public class EventApiController implements EventsApi {
     ServletRequest request;
 
     @Override
-    public ResponseEntity<Event> triggerEvent(@Valid Event event) {
+    public ResponseEntity<Void> triggerEvent(@Valid Event event) {
         // Fetch the linked application from the token passed in request attribute
         ApplicationEntity applicationEntity = (ApplicationEntity) request.getAttribute("applicationEntity");
 

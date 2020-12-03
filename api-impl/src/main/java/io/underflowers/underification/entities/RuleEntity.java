@@ -1,6 +1,5 @@
 package io.underflowers.underification.entities;
 
-import io.underflowers.underification.api.model.PointScale;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -18,7 +17,10 @@ public class RuleEntity implements Serializable {
     private int amount;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "badges_id", nullable=true)
+    @JoinColumns({
+            @JoinColumn(name = "badge_name", referencedColumnName = "name", nullable=false),
+            @JoinColumn(name = "application_id", referencedColumnName = "application", nullable=false)
+    })
     private BadgeEntity badge;
 
     @ManyToOne(fetch = FetchType.LAZY)

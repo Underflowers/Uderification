@@ -39,14 +39,13 @@ public class EventApiController implements EventsApi {
 
         // Try to fetch all rules that concern the current eventType / application
         List<RuleEntity> ruleEntities = ruleRepository.findAllByEventTypeAndApplication(event.getEventType(), applicationEntity);
-        if(ruleEntities.isEmpty()){
+        if(ruleEntities.isEmpty())
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
 
         // Try to fetch the current user from the Event pass in parameter and the linked application
         UserEntity userEntity = userRepository.findByAppUserIdAndApplication(event.getAppUserId(), applicationEntity);
         // The user doesn't exists => create now in the fly
-        if(userEntity == null){
+        if(userEntity == null) {
             userEntity = new UserEntity();
             userEntity.setAppUserId(event.getAppUserId());
             userEntity.setApplication(applicationEntity);
@@ -66,7 +65,7 @@ public class EventApiController implements EventsApi {
             }
 
             // The rule will reward the user with points for a pointScale
-            if(ruleEntity.getPointScale() != null){
+            if(ruleEntity.getPointScale() != null) {
                 PointRewardEntity pointRewardEntity = new PointRewardEntity();
                 pointRewardEntity.setPointScale(ruleEntity.getPointScale());
                 pointRewardEntity.setPoints(ruleEntity.getAmount());

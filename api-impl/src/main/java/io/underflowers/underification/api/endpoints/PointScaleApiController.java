@@ -2,8 +2,8 @@ package io.underflowers.underification.api.endpoints;
 
 import io.underflowers.underification.api.PointScalesApi;
 import io.underflowers.underification.api.model.LeaderBoard;
+import io.underflowers.underification.api.model.LeaderBoardEntry;
 import io.underflowers.underification.api.model.PointScale;
-import io.underflowers.underification.api.model.UserScore;
 import io.underflowers.underification.entities.ApplicationEntity;
 import io.underflowers.underification.entities.PointScaleEntity;
 import io.underflowers.underification.repositories.PointRewardRepository;
@@ -58,20 +58,20 @@ public class PointScaleApiController implements PointScalesApi {
     }
 
     @Override
-    public ResponseEntity<LeaderBoard> getLeaderBoard(String pointScale, @Valid Integer limit) {
+    public ResponseEntity<List<LeaderBoardEntry>> getLeaderBoard(String pointScale, @Valid Integer limit) {
         // Fetch the linked application from the token passed
         ApplicationEntity applicationEntity = (ApplicationEntity) request.getAttribute("applicationEntity");
 
         // point scale doesn't exist for the given application
         if (pointScaleRepository.findByNameAndApplication(pointScale, applicationEntity) == null) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
         limit = limit == null ? DEFAULT_LIMIT : limit;
         // Retrieve leaders for the given point scale
-        List<UserScore> leaders = pointRewardRepository.findLeaders(applicationEntity.getId(), pointScale, limit).stream()
-                .map(u -> new UserScore().appUserId(u.getAppUserId()).score(u.getScore())).collect(Collectors.toList());
-        return ResponseEntity.ok(new LeaderBoard().pointScale(pointScale).leaders(leaders));
+        List<LeaderBoardEntry> leaders = pointRewardRepository.findLeaders(applicationEntity.getId(), pointScale, limit).stream()
+                .map(u -> new LeaderBoardEntry().appUserId(u.getFirst()).score(u.getSecond().intValue())).collect(Collectors.toList());
+        return ResponseEntity.ok(leaders);
     }
 
     private PointScaleEntity toPointScaleEntity(PointScale pointScale) {

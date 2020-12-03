@@ -84,6 +84,26 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Badge'
+
+  /users/{user}/scores:
+    get:
+      description: get badges earned by a user
+      operationId: getUserScores
+      parameters:
+        - in: path
+          name: user
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: success
+          content:
+            'application/json':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserScore'
   /pointScales:
     post:
       description: Create a new point scale
@@ -135,7 +155,9 @@ paths:
           content:
             'application/json':
               schema:
-                $ref: '#/components/schemas/LeaderBoard'
+                type: array
+                items:
+                  $ref: '#/components/schemas/LeaderBoardEntry'
   /rules:
     post:
       description: Create a new rule
@@ -240,19 +262,17 @@ components:
     UserScore:
       type: object
       properties:
+        pointScaleName:
+          type: string
+        score:
+          type: integer
+    LeaderBoardEntry:
+      type: object
+      properties:
         appUserId:
           type: string
         score:
-          type: int
-    LeaderBoard:
-      type: object
-      properties:
-        pointScale:
-          type: string
-        leaders:
-          type: array
-          items:
-            $ref: '#/components/schemas/UserScore'
+          type: integer
     Rule:
       type: object
       properties:
@@ -263,7 +283,7 @@ components:
         scaleName:
           type: string
         scalePoints:
-          type: int
+          type: integer
     Event:
       type: object
       properties:

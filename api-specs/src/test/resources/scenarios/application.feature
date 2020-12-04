@@ -11,3 +11,4 @@ Feature: Operations on applications
     Given I have an application payload
     When I POST the application payload to the /applications endpoint
     Then I receive a 201 status code
+    And I receive a non-null application token

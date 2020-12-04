@@ -186,6 +186,8 @@ paths:
             schema:
               $ref: '#/components/schemas/Event'
       responses:
+        '200':
+          description: OK
         '201':
           description: success
         '400':

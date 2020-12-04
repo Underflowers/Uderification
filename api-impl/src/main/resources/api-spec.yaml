@@ -23,7 +23,6 @@ paths:
             'application/json':
               schema:
                 $ref: '#/components/schemas/Token'
-
     get:
       description: get the list of all applications
       operationId: getApplications
@@ -36,6 +35,7 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Application'
+
   /badges:
     post:
       description: Create a new badge
@@ -52,7 +52,8 @@ paths:
             'application/json':
               schema:
                 $ref: '#/components/schemas/Badge'
-
+        '409':
+          description: Conflict, badge already exists for the given application
     get:
       description: get the list of all badges
       operationId: getBadges
@@ -65,21 +66,17 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Badge'
-  /fruits:
-    post:
-      description: create a fruit
-      operationId: createFruit
-      requestBody:
-        content:
-          'application/json':
-            schema:
-              $ref: '#/components/schemas/Fruit'
-      responses:
-        '201':
-          description: created
+
+  /users/{user}/badges:
     get:
-      description: get the list of all fruits
-      operationId: getFruits
+      description: get badges earned by a user
+      operationId: getUserBadges
+      parameters:
+        - in: path
+          name: user
+          schema:
+            type: string
+          required: true
       responses:
         '200':
           description: success
@@ -88,16 +85,17 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Fruit'
-  /fruits/{id}:
+                  $ref: '#/components/schemas/Badge'
+
+  /users/{user}/scores:
     get:
-      description: get one fruit, by id
-      operationId: getFruit
+      description: get badges earned by a user
+      operationId: getUserScores
       parameters:
         - in: path
-          name: id
+          name: user
           schema:
-            type: integer
+            type: string
           required: true
       responses:
         '200':
@@ -105,7 +103,103 @@ paths:
           content:
             'application/json':
               schema:
-                $ref: '#/components/schemas/Fruit'
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserScore'
+
+  /pointScales:
+    post:
+      description: Create a new point scale
+      operationId: createPointScale
+      requestBody:
+        content:
+          'application/json':
+            schema:
+              $ref: '#/components/schemas/PointScale'
+      responses:
+        '201':
+          description: success
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/PointScale'
+        '409':
+          description: Conflict, point scale already exists for the given application
+    get:
+      description: get the list of all point scales
+      operationId: getPointScales
+      responses:
+        '200':
+          description: success
+          content:
+            'application/json':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PointScale'
+
+  /pointScales/{pointScale}/leaderBoard:
+    get:
+      description: Get the leader board for the given point scale
+      operationId: getLeaderBoard
+      parameters:
+        - in: path
+          name: pointScale
+          schema:
+            type: string
+          required: true
+          description: Name of the point scale in the application
+        - in: query
+          name: limit
+          schema:
+            type: integer
+          description: The number of users to return in the leader board
+      responses:
+        '200':
+          description: success
+          content:
+            'application/json':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LeaderBoardEntry'
+
+  /rules:
+    post:
+      description: Create a new rule
+      operationId: createRule
+      requestBody:
+        content:
+          'application/json':
+            schema:
+              $ref: '#/components/schemas/Rule'
+      responses:
+        '201':
+          description: success
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/Rule'
+        '400':
+          description: Bad request, must have a valid badgeName OR valid scaleName + point
+
+  /events:
+    post:
+      description: Trigger a new event
+      operationId: triggerEvent
+      requestBody:
+        content:
+          'application/json':
+            schema:
+              $ref: '#/components/schemas/Event'
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: success
+        '400':
+          description: Bad request, must have a valid eventType
+
 components:
   securitySchemes:
     #    bearerAuth:            # arbitrary name for the security scheme
@@ -168,4 +262,41 @@ components:
         image:
           type: string
         description:
+          type: string
+    PointScale:
+      type: object
+      properties:
+        name:
+          type: string
+    UserScore:
+      type: object
+      properties:
+        pointScaleName:
+          type: string
+        score:
+          type: integer
+    LeaderBoardEntry:
+      type: object
+      properties:
+        appUserId:
+          type: string
+        score:
+          type: integer
+    Rule:
+      type: object
+      properties:
+        eventType:
+          type: string
+        badgeName:
+          type: string
+        scaleName:
+          type: string
+        scalePoints:
+          type: integer
+    Event:
+      type: object
+      properties:
+        eventType:
+          type: string
+        appUserId:
           type: string

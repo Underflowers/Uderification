@@ -11,16 +11,13 @@ import java.io.Serializable;
     uniqueConstraints=
     @UniqueConstraint(columnNames={"name", "application_id"})
 )
-public class BadgeEntity implements Serializable {
+public class PointScaleEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    private Long id;
 
-    private String image;
-    private String description;
     private String name;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "application_id", nullable=false)
     private ApplicationEntity application;

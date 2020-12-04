@@ -1,7 +1,6 @@
 package io.underflowers.underification.api.endpoints;
 
 import io.underflowers.underification.api.PointScalesApi;
-import io.underflowers.underification.api.model.LeaderBoard;
 import io.underflowers.underification.api.model.LeaderBoardEntry;
 import io.underflowers.underification.api.model.PointScale;
 import io.underflowers.underification.entities.ApplicationEntity;
@@ -12,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.server.ResponseStatusException;
 
 import javax.servlet.ServletRequest;
 import javax.validation.Valid;

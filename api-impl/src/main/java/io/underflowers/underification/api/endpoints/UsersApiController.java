@@ -2,8 +2,6 @@ package io.underflowers.underification.api.endpoints;
 
 import io.underflowers.underification.api.UsersApi;
 import io.underflowers.underification.api.model.Badge;
-import io.underflowers.underification.api.model.LeaderBoard;
-import io.underflowers.underification.api.model.LeaderBoardEntry;
 import io.underflowers.underification.api.model.UserScore;
 import io.underflowers.underification.entities.ApplicationEntity;
 import io.underflowers.underification.entities.BadgeRewardEntity;

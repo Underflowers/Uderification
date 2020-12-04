@@ -17,10 +17,7 @@ public class RuleEntity implements Serializable {
     private int amount;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumns({
-            @JoinColumn(name = "badge_name", referencedColumnName = "name", nullable=false),
-            @JoinColumn(name = "application_id", referencedColumnName = "application", nullable=false)
-    })
+    @JoinColumn(name = "badge_id", nullable=true)
     private BadgeEntity badge;
 
     @ManyToOne(fetch = FetchType.LAZY)

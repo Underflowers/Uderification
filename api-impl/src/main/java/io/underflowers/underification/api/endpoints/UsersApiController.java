@@ -42,7 +42,7 @@ public class UsersApiController implements UsersApi {
         // get all badges related to the given user
         for (BadgeRewardEntity badgeRewardEntity : badgeRewardRepository.findAllByUser(userEntity))
             badges.add(new Badge()
-                .name(badgeRewardEntity.getBadge().getId().getName())
+                .name(badgeRewardEntity.getBadge().getName())
                 .image(badgeRewardEntity.getBadge().getImage())
                 .description(badgeRewardEntity.getBadge().getDescription())
             );

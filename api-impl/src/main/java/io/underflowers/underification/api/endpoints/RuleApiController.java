@@ -55,7 +55,7 @@ public class RuleApiController implements RulesApi {
 
         // We have a badge name => check if exists in DB
         if(!rule.getBadgeName().isEmpty()) {
-            BadgeEntity badgeEntity = badgeRepository.findById_NameAndId_Application(rule.getBadgeName(), applicationEntity.getId());
+            BadgeEntity badgeEntity = badgeRepository.findByNameAndApplication(rule.getBadgeName(), applicationEntity);
             if(badgeEntity == null)
                 return null;
 

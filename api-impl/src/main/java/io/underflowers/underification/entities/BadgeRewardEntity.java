@@ -16,10 +16,7 @@ public class BadgeRewardEntity {
     private LocalDateTime dateTime;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumns({
-            @JoinColumn(name = "badge_name", referencedColumnName = "name", nullable=false),
-            @JoinColumn(name = "application_id", referencedColumnName = "application", nullable=false)
-    })
+    @JoinColumn(name = "badge_id", nullable=false)
     private BadgeEntity badge;
 
     @ManyToOne(fetch = FetchType.LAZY)

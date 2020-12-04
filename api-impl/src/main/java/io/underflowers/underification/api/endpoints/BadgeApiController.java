@@ -31,7 +31,8 @@ public class BadgeApiController implements BadgesApi {
         ApplicationEntity applicationEntity = (ApplicationEntity) request.getAttribute("applicationEntity");
         BadgeEntity badgeEntity = this.toBadgeEntity(badge);
         // link the application and save the badge
-        badgeEntity.setId(new BadgeKey(badge.getName(), applicationEntity.getId()));
+        badgeEntity.setApplication(applicationEntity);
+        //badgeEntity.setId(new BadgeKey(badge.getName(), applicationEntity.getId()));
         badgeRepository.save(badgeEntity);
         return new ResponseEntity<>(badge, HttpStatus.CREATED);
     }
@@ -42,7 +43,7 @@ public class BadgeApiController implements BadgesApi {
         ApplicationEntity applicationEntity = (ApplicationEntity) request.getAttribute("applicationEntity");
         // Fetch all badges by application
         List<Badge> badges = new ArrayList<>();
-        for (BadgeEntity badgeEntity : badgeRepository.findAllById_Application(applicationEntity.getId()))
+        for (BadgeEntity badgeEntity : badgeRepository.findAllByApplication(applicationEntity))
             badges.add(toBadge(badgeEntity));
 
         return ResponseEntity.ok(badges);
@@ -51,13 +52,14 @@ public class BadgeApiController implements BadgesApi {
     private BadgeEntity toBadgeEntity(Badge badge) {
         BadgeEntity entity = new BadgeEntity();
         entity.setImage(badge.getImage());
+        entity.setName(badge.getName());
         entity.setDescription(badge.getDescription());
         return entity;
     }
 
     private Badge toBadge(BadgeEntity entity) {
         Badge badge = new Badge();
-        badge.setName(entity.getId().getName());
+        badge.setName(entity.getName());
         badge.setImage(entity.getImage());
         badge.setDescription(entity.getDescription());
         return badge;

@@ -4,7 +4,6 @@ import io.underflowers.underification.api.BadgesApi;
 import io.underflowers.underification.api.model.Badge;
 import io.underflowers.underification.entities.ApplicationEntity;
 import io.underflowers.underification.entities.BadgeEntity;
-import io.underflowers.underification.entities.keys.BadgeKey;
 import io.underflowers.underification.repositories.BadgeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,10 +28,15 @@ public class BadgeApiController implements BadgesApi {
     public ResponseEntity<Badge> createBadge(@Valid Badge badge) {
         // Fetch the linked application from the token passed
         ApplicationEntity applicationEntity = (ApplicationEntity) request.getAttribute("applicationEntity");
+
+        // check that the badge doesn't already exist
+        // if so, return 409
+        if (badgeRepository.findByNameAndApplication(badge.getName(), applicationEntity) != null)
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
+
         BadgeEntity badgeEntity = this.toBadgeEntity(badge);
         // link the application and save the badge
         badgeEntity.setApplication(applicationEntity);
-        //badgeEntity.setId(new BadgeKey(badge.getName(), applicationEntity.getId()));
         badgeRepository.save(badgeEntity);
         return new ResponseEntity<>(badge, HttpStatus.CREATED);
     }

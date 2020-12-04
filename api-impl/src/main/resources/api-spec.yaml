@@ -84,6 +84,26 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Badge'
+
+  /users/{user}/scores:
+    get:
+      description: get badges earned by a user
+      operationId: getUserScores
+      parameters:
+        - in: path
+          name: user
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: success
+          content:
+            'application/json':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserScore'
   /pointScales:
     post:
       description: Create a new point scale
@@ -113,7 +133,7 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/PointScale'
-  /leaderBoards/{pointScale}:
+  /pointScales/{pointScale}/leaderBoard:
     get:
       description: Get the leader board for the given point scale
       operationId: getLeaderBoard
@@ -123,6 +143,7 @@ paths:
           schema:
             type: string
           required: true
+          description: Name of the point scale in the application
         - in: query
           name: limit
           schema:
@@ -134,7 +155,9 @@ paths:
           content:
             'application/json':
               schema:
-                $ref: '#/components/schemas/LeaderBoard'
+                type: array
+                items:
+                  $ref: '#/components/schemas/LeaderBoardEntry'
   /rules:
     post:
       description: Create a new rule
@@ -239,19 +262,17 @@ components:
     UserScore:
       type: object
       properties:
-        userId:
+        pointScaleName:
           type: string
         score:
-          type: int
-    LeaderBoard:
+          type: integer
+    LeaderBoardEntry:
       type: object
       properties:
-        pointScale:
+        appUserId:
           type: string
-        leaders:
-          type: array
-          items:
-            $ref: '#/components/schemas/UserScore'
+        score:
+          type: integer
     Rule:
       type: object
       properties:
@@ -262,7 +283,7 @@ components:
         scaleName:
           type: string
         scalePoints:
-          type: int
+          type: integer
     Event:
       type: object
       properties:

@@ -7,11 +7,15 @@ import java.io.Serializable;
 
 @Entity
 @Data
+@Table(
+    uniqueConstraints=
+    @UniqueConstraint(columnNames={"name", "application_id"})
+)
 public class PointScaleEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     private String name;
     @ManyToOne(fetch = FetchType.LAZY)

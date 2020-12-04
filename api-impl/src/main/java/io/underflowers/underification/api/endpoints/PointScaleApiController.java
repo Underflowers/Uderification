@@ -36,6 +36,12 @@ public class PointScaleApiController implements PointScalesApi {
     public ResponseEntity<PointScale> createPointScale(@Valid PointScale pointScale) {
         // Fetch the linked application from the token passed
         ApplicationEntity applicationEntity = (ApplicationEntity) request.getAttribute("applicationEntity");
+
+        // check that the point scale doesn't already exist
+        // if so, return 409
+        if (pointScaleRepository.findByNameAndApplication(pointScale.getName(), applicationEntity) != null)
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
+
         PointScaleEntity pointScaleEntity = this.toPointScaleEntity(pointScale);
         // link the application and save the pointScale
         pointScaleEntity.setApplication(applicationEntity);

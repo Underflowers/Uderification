@@ -35,9 +35,8 @@ public class RuleApiController implements RulesApi {
     @Override
     public ResponseEntity<Rule> createRule(@Valid Rule rule) {
         RuleEntity ruleEntity = toRuleEntity(rule);
-        if(ruleEntity == null){
+        if(ruleEntity == null)
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
 
         ruleRepository.save(ruleEntity);
         return new ResponseEntity<>(rule, HttpStatus.CREATED);
@@ -45,9 +44,9 @@ public class RuleApiController implements RulesApi {
 
     private RuleEntity toRuleEntity(Rule rule) {
         // Must have one of them or both
-        if(rule.getBadgeName().isEmpty() && rule.getScaleName().isEmpty()){
+        if(rule.getBadgeName().isEmpty() && rule.getScaleName().isEmpty())
             return null;
-        }
+
 
         // Fetch the linked application from the token passed
         ApplicationEntity applicationEntity = (ApplicationEntity) request.getAttribute("applicationEntity");
@@ -57,9 +56,8 @@ public class RuleApiController implements RulesApi {
         // We have a badge name => check if exists in DB
         if(!rule.getBadgeName().isEmpty()) {
             BadgeEntity badgeEntity = badgeRepository.findByNameAndApplication(rule.getBadgeName(), applicationEntity);
-            if(badgeEntity == null){
+            if(badgeEntity == null)
                 return null;
-            }
 
             ruleEntity.setBadge(badgeEntity);
             ruleEntity.setAmount(0);
@@ -68,9 +66,8 @@ public class RuleApiController implements RulesApi {
         // We have a scale name and points => check if exists in DB
         if(!rule.getScaleName().isEmpty() && rule.getScalePoints() != null) {
             PointScaleEntity pointScaleEntity = pointScaleRepository.findByNameAndApplication(rule.getScaleName(), applicationEntity);
-            if(pointScaleEntity == null){
+            if(pointScaleEntity == null)
                 return null;
-            }
 
             ruleEntity.setPointScale(pointScaleEntity);
             ruleEntity.setAmount(rule.getScalePoints());

@@ -44,7 +44,7 @@ public class EventApiController implements EventsApi {
 
         // Try to fetch the current user from the Event pass in parameter and the linked application
         UserEntity userEntity = userRepository.findByAppUserIdAndApplication(event.getAppUserId(), applicationEntity);
-        // The user doesn't exists => create now in the fly
+        // The user doesn't exists => create now on the fly
         if(userEntity == null) {
             userEntity = new UserEntity();
             userEntity.setAppUserId(event.getAppUserId());
@@ -56,7 +56,7 @@ public class EventApiController implements EventsApi {
         for(RuleEntity ruleEntity : ruleEntities) {
 
             // The rule will reward the user with a badge
-            if(ruleEntity.getBadge() != null){
+            if(ruleEntity.getBadge() != null) {
                 BadgeRewardEntity badgeRewardEntity = new BadgeRewardEntity();
                 badgeRewardEntity.setBadge(ruleEntity.getBadge());
                 badgeRewardEntity.setUser(userEntity);

@@ -21,10 +21,10 @@ public class RuleEntity implements Serializable {
     private BadgeEntity badge;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "pointScales_id", nullable=true)
+    @JoinColumn(name = "pointScale_id", nullable=true)
     private PointScaleEntity pointScale;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "applications_id", nullable=false)
+    @JoinColumn(name = "application_id", nullable=false)
     private ApplicationEntity application;
 }

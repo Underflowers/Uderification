@@ -7,6 +7,10 @@ import java.io.Serializable;
 
 @Entity
 @Data
+@Table(
+    uniqueConstraints=
+    @UniqueConstraint(columnNames={"name", "application_id"})
+)
 public class PointScaleEntity implements Serializable {
 
     @Id

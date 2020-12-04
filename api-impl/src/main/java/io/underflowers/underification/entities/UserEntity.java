@@ -7,6 +7,10 @@ import java.io.Serializable;
 
 @Entity
 @Data
+@Table(
+        uniqueConstraints=
+        @UniqueConstraint(columnNames={"appUserId", "application_id"})
+)
 public class UserEntity implements Serializable {
 
     @Id
@@ -16,6 +20,6 @@ public class UserEntity implements Serializable {
     private String appUserId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "applications_id", nullable=false)
+    @JoinColumn(name = "application_id", nullable=false)
     private ApplicationEntity application;
 }

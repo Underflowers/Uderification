@@ -1147,5 +1147,10 @@
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
+    <foreign-key id="341" parent="283" name="FK2rira89a5g7g5c1otf840buqq">
+      <ColNames>applications_id</ColNames>
+      <RefTableName>application_entity</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
   </database-model>
 </dataSource>

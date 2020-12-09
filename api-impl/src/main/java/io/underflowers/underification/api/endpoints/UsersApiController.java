@@ -42,7 +42,7 @@ public class UsersApiController implements UsersApi {
 
         UserEntity userEntity = userRepository.findByAppUserIdAndApplication(user, applicationEntity);
         if (userEntity == null)
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
         List<Badge> badges = new ArrayList<>();
         // get all badges related to the given user

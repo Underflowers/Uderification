@@ -11,12 +11,12 @@ public class BadgeRewardEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     private LocalDateTime dateTime;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "badges_id", nullable=false)
+    @JoinColumn(name = "badge_id", nullable=false)
     private BadgeEntity badge;
 
     @ManyToOne(fetch = FetchType.LAZY)

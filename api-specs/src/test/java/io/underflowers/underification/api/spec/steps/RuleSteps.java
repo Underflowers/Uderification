@@ -17,16 +17,22 @@ public class RuleSteps {
     private BasicSteps basicSteps;
     private ApplicationSteps applicationSteps;
     private BadgeSteps badgeSteps;
+    private PointScaleSteps pointScaleSteps;
     private DefaultApi api;
 
     private Rule rule;
     private Rule lastReceivedRule;
 
-    public RuleSteps(Environment environment, BasicSteps basicSteps, ApplicationSteps applicationSteps, BadgeSteps badgeSteps) {
+    public RuleSteps(Environment environment,
+                     BasicSteps basicSteps,
+                     ApplicationSteps applicationSteps,
+                     BadgeSteps badgeSteps,
+                     PointScaleSteps pointScaleSteps) {
         this.environment = environment;
         this.basicSteps = basicSteps;
         this.applicationSteps = applicationSteps;
         this.badgeSteps = badgeSteps;
+        this.pointScaleSteps = pointScaleSteps;
 
         this.api = environment.getApi();
     }
@@ -40,15 +46,23 @@ public class RuleSteps {
                 .scalePoints(0);
     }
 
-//    @Given("I have a scale rule payload")
-//    public void i_have_a_scale_rule_payload() throws Throwable {
-//        rule = new Rule().scaleName("").eventType("EventForScale");
-//    }
-//
-//    @Given("I have a badge-and-scale rule payload")
-//    public void i_have_a_badge_and_scale_rule_payload() throws Throwable {
-//        rule = new Rule().badgeName("Badge for rule").eventType("EventForBadgeAndScale");
-//    }
+    @Given("I have a scale rule payload")
+    public void i_have_a_scale_rule_payload() throws Throwable {
+        rule = new Rule()
+                .badgeName("")
+                .eventType("EventForScale")
+                .scaleName(pointScaleSteps.getLastReceivedPointScale().getName())
+                .scalePoints(1);
+    }
+
+    @Given("I have a badge-and-scale rule payload")
+    public void i_have_a_badge_and_scale_rule_payload() throws Throwable {
+        rule = new Rule()
+                .badgeName(badgeSteps.getLastReceivedBadge().getName())
+                .eventType("EventForBadgeAndScale")
+                .scaleName(pointScaleSteps.getLastReceivedPointScale().getName())
+                .scalePoints(1);
+    }
 
     @When("^I POST the rule payload to the /rules endpoint$")
     public void i_POST_the_rule_payload_to_the_rules_endpoint() throws Throwable {
@@ -64,5 +78,9 @@ public class RuleSteps {
     @And("I receive a payload that is the same as the rule payload")
     public void iReceiveAPayloadThatIsTheSameAsTheBadgePayload() {
         assertEquals(rule, lastReceivedRule);
+    }
+
+    public Rule getLastReceivedRule() {
+        return lastReceivedRule;
     }
 }

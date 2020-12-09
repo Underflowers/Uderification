@@ -60,4 +60,7 @@ public class PointScaleSteps {
         }
     }
 
+    public PointScale getLastReceivedPointScale() {
+        return lastReceivedPointScale;
+    }
 }

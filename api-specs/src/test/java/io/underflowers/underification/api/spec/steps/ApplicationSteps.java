@@ -32,9 +32,9 @@ public class ApplicationSteps {
     @Given("I have an application payload")
     public void i_have_an_application_payload() throws Throwable {
         application = new RegisteringApplication()
-                .name("My Application")
+                .name("test_application")
                 .description("This is a test application")
-                .url("images/picture.png");
+                .url("URL");
     }
 
     @When("^I POST the application payload to the /applications endpoint$")

@@ -8,8 +8,6 @@ import io.underflowers.underification.api.DefaultApi;
 import io.underflowers.underification.api.dto.Badge;
 import io.underflowers.underification.api.spec.helpers.Environment;
 
-import java.util.ArrayList;
-
 import static org.junit.Assert.assertEquals;
 
 public class BadgeSteps {
@@ -33,9 +31,9 @@ public class BadgeSteps {
     @Given("I have a badge payload")
     public void i_have_an_badge_payload() throws Throwable {
         badge = new Badge()
-                .description("This is a badge")
+                .description("This is a test badge")
                 .image("image")
-                .name("Badge 1");
+                .name("test_badge_1");
     }
 
     @When("^I POST the badge payload to the /badges endpoint$")

@@ -60,4 +60,8 @@ public class BadgeSteps {
     public void iReceiveAPayloadThatIsTheSameAsTheBadgePayload() {
         assertEquals(badge, lastReceivedBadge);
     }
+
+    public Badge getLastReceivedBadge() {
+        return lastReceivedBadge;
+    }
 }

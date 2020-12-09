@@ -14,4 +14,3 @@ Feature: Operations on point scale
   Scenario: get the list of point scales
     When I send a GET to the /pointScales endpoint
     Then I receive a 200 status code
-    And I receive a payload that is the same as the pointScale payload

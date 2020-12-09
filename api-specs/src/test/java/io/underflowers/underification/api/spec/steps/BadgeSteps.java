@@ -8,6 +8,8 @@ import io.underflowers.underification.api.DefaultApi;
 import io.underflowers.underification.api.dto.Badge;
 import io.underflowers.underification.api.spec.helpers.Environment;
 
+import java.util.ArrayList;
+
 import static org.junit.Assert.assertEquals;
 
 public class BadgeSteps {

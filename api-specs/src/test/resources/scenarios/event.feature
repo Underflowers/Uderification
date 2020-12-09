@@ -23,9 +23,17 @@ Feature: Trigger events
     When I POST the event payload
     Then I receive a 201 status code
 
-  Scenario: i POST an event to have point scale and badge reward
+  Scenario: i POST an event to have point scale and badge reward and see my rewards
     Given I have a badge-and-scale rule payload
     When I POST the rule payload to the /rules endpoint
     Given I have an event payload
     When I POST the event payload
     Then I receive a 201 status code
+
+    When I send a GET to the /users/id/scores endpoint
+    Then I receive a 200 status code
+    And I see I have a point
+
+    When I send a GET to the /users/id/badges endpoint
+    Then I receive a 200 status code
+    And I see I have a badge

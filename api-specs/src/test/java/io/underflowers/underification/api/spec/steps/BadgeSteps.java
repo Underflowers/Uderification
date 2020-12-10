@@ -1,43 +1,47 @@
 package io.underflowers.underification.api.spec.steps;
 
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 import io.underflowers.underification.ApiException;
 import io.underflowers.underification.api.DefaultApi;
-import io.underflowers.underification.api.dto.Application;
 import io.underflowers.underification.api.dto.Badge;
 import io.underflowers.underification.api.spec.helpers.Environment;
+
+import static org.junit.Assert.assertEquals;
 
 public class BadgeSteps {
 
     private Environment environment;
     private BasicSteps basicSteps;
+    private ApplicationSteps applicationSteps;
     private DefaultApi api;
 
-    Badge badge;
+    private Badge badge;
+    private Badge lastReceivedBadge;
 
-    private Application lastReceivedBadge;
-
-    public BadgeSteps(Environment environment, BasicSteps basicSteps) {
+    public BadgeSteps(Environment environment, BasicSteps basicSteps, ApplicationSteps applicationSteps) {
         this.environment = environment;
         this.basicSteps = basicSteps;
+        this.applicationSteps = applicationSteps;
 
         this.api = environment.getApi();
     }
 
-    @Given("I have an badge payload")
+    @Given("I have a badge payload")
     public void i_have_an_badge_payload() throws Throwable {
         badge = new Badge()
-                .description("This is a badge")
+                .description("This is a test badge")
                 .image("image")
-                .name("Badge 1");
+                .name("test_badge_1");
     }
 
     @When("^I POST the badge payload to the /badges endpoint$")
     public void i_POST_the_badge_payload_to_the_badges_endpoint() throws Throwable {
         try {
-            // TODO give token
+            api.getApiClient().addDefaultHeader("X-API-KEY", applicationSteps.getReceivedToken());
             basicSteps.processApiResponse(api.createBadgeWithHttpInfo(badge));
+            lastReceivedBadge = (Badge)basicSteps.getLastApiResponse().getData();
         } catch (ApiException e) {
             basicSteps.processApiException(e);
         }
@@ -52,20 +56,12 @@ public class BadgeSteps {
         }
     }
 
-    /*@When("I send a GET to the URL in the location header")
-    public void iSendAGETToTheURLInTheLocationHeader() {
-        Integer id = Integer.parseInt(lastReceivedLocationHeader.substring(lastReceivedLocationHeader.lastIndexOf('/') + 1));
-        try {
-            lastApiResponse = api.getBadgesWithHttpInfo(id);
-            processApiResponse(lastApiResponse);
-            lastReceivedBadge = (Badge)lastApiResponse.getData();
-        } catch (ApiException e) {
-            processApiException(e);
-        }
-    }*/
-
-    /*@And("I receive a payload that is the same as the badge payload")
+    @And("I receive a payload that is the same as the badge payload")
     public void iReceiveAPayloadThatIsTheSameAsTheBadgePayload() {
         assertEquals(badge, lastReceivedBadge);
-    }*/
+    }
+
+    public Badge getLastReceivedBadge() {
+        return lastReceivedBadge;
+    }
 }

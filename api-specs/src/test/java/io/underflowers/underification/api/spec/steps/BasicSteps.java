@@ -61,4 +61,8 @@ public class BasicSteps {
     public String getLastReceivedLocationHeader() {
         return lastReceivedLocationHeader;
     }
+
+    public ApiResponse getLastApiResponse() {
+        return lastApiResponse;
+    }
 }

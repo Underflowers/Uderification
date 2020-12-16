@@ -1,8 +1,73 @@
-# TrainingREST
+# Underification
+
+## About
+
+Underification is a microservice to help you integrate gamification features to your projects. This means that it **doesn't offer** any form of graphical interface and it should only be used to help you create your own projects.
+
+## API endpoints
+
+If you wish to have a documentation of the API, you can build and run the REST API. After doing the followin, the Sprint Boot server will be up and running, listening for connections on port 8080.
+
+```bash
+docker-compose up -d underification_db
+cd api-impl/
+mvn sprint-boot:run
+```
+
+> Note: If you aren't using the mysql container we offer, you'll have to change the configuration in [application.properties](.//api-impl/src/main/resources/application.properties).
+
+### TLDR
+
+Here's a tldr of the API documentation if you're too lazy to start it up. You should be a shamed of yourself!
+
+<p align="center">
+<img src="https://media.giphy.com/media/vX9WcCiWwUF7G/giphy.gif">
+</p>
+
+The API offers two access points. We could say that they correspond to a `backend` and a `frontend` The first (i.e. the backend) is to let you (or your sysadmin) configure your application within the engine, and the second (i.e. the frontedn) is what your application will be using to access the data stored by the engine or trigger events (little bit on that later).
+
+#### Backend
+
+##### Application
+
+##### Badge
+
+##### Scale points
+
+##### Rules
+
+#### Frontend
+
+##### Envents
+
+##### Users
+
+##### Scale points
+
+## Deployment
+
+## Contributing
+
+### Prerequisites
+
+### Project setup
+
+### Tests
+
+## Possible issues
+
+## Main contributors
+
+| Name               | Username      |
+| ------------------ | ------------- |
+| Robin Demarta      | rdemarta      |
+| Loic Dessaules     | gollgot       |
+| Thibaud Franchetti | ChatDeBlofeld |
+| Doran Kayoumi      | kayoumido     |
+
+
 
 # Build and run the Fruit microservice
-
-You can use maven to build and run the REST API implementation from the command line. After invoking the following maven goal, the Spring Boot server will be up and running, listening for connections on port 8080.
 
 ```
 docker-compose up -d underification_db

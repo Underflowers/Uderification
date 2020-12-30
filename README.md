@@ -18,19 +18,19 @@ mvn sprint-boot:run
 
 ### TLDR
 
-Here's a tldr of the API documentation if you're too lazy to start it up. You should be a shamed of yourself!
+Here's a tldr of the API documentation if you're too lazy to start it up. But know that you should be a shamed of yourself!
 
 <p align="center">
 <img src="https://media.giphy.com/media/vX9WcCiWwUF7G/giphy.gif">
 </p>
 
-The API offers two access points. We could say that they correspond to a `backend` and a `frontend`. The first (i.e. the backend) is to let you (or your sysadmin) configure your application within the engine, and the second (i.e. the frontend) is what your application will be using to access the data stored by the engine or trigger events (little bit on that later).
+The API offers two access points, we could say that they correspond to a `backend` and a `frontend`. The first (i.e. the backend) is to let you (or your sysadmin) configure your application within the engine, and the second (i.e. the frontend) is what your application will be using to access the data stored by the engine or trigger events (little bit on that later).
 
 #### Backend
 
 ##### Applications
 
-**`POST`** `http://underification.lo/applications`
+**`POST`** `/applications`
 
 Registers the application within the gamification engine.
 
@@ -69,13 +69,13 @@ curl --location --request POST 'http://underification.lo/applications' \
 
 # Response
 {
-	"token":"ELodX6tPk3Lu8vHj2aHdMrkadxWouHbVkorldPPo0IuqGiNyUX"
+	"token":"vKlk1qRecW2w6JCPQE2UPyjSdFUCXbSkimGl3nPFHFgmVvLXp2"
 }
 ```
 
 ##### Badge
 
-**`GET`** `http://underification.lo/badges`
+**`GET`** `/badges`
 
 Get all the badges of an application
 
@@ -111,7 +111,7 @@ The given authentication token isn't valid.
 ```bash
 curl --location --request GET "http://underification.lo/badges" \
 --header 'Content-Type: application/json' \
---header 'X-API-KEY: ELodX6tPk3Lu8vHj2aHdMrkadxWouHbVkorldPPo0IuqGiNyUX'
+--header 'X-API-KEY: vKlk1qRecW2w6JCPQE2UPyjSdFUCXbSkimGl3nPFHFgmVvLXp2'
 
 # Response
 [
@@ -130,7 +130,7 @@ curl --location --request GET "http://underification.lo/badges" \
 
 
 
-**`POST`** `http://underification.lo/badges`
+**`POST`** `/badges`
 
 Create a new badge for a given application
 
@@ -168,7 +168,7 @@ The given authentication token isn't valid.
 ```bash
 curl --location --request POST 'http://underification.lo/badges' \
 --header 'Content-Type: application/json' \
---header 'X-API-KEY: ELodX6tPk3Lu8vHj2aHdMrkadxWouHbVkorldPPo0IuqGiNyUX' \
+--header 'X-API-KEY: vKlk1qRecW2w6JCPQE2UPyjSdFUCXbSkimGl3nPFHFgmVvLXp2' \
 --data-raw '{
     "name": "Newbie",
     "description": "Newly created account",
@@ -185,7 +185,7 @@ curl --location --request POST 'http://underification.lo/badges' \
 
 ##### Scale points
 
-**`GET`** `http://underification.lo/pointScales`
+**`GET`** `/pointScales`
 
 Get all the point scales of an application
 
@@ -219,7 +219,7 @@ The given authentication token isn't valid.
 ```bash
 curl --location --request GET "http://underification.lo/pointScales" \
 --header 'Content-Type: application/json' \
---header 'X-API-KEY: ELodX6tPk3Lu8vHj2aHdMrkadxWouHbVkorldPPo0IuqGiNyUX'
+--header 'X-API-KEY: vKlk1qRecW2w6JCPQE2UPyjSdFUCXbSkimGl3nPFHFgmVvLXp2'
 
 # Response
 [
@@ -234,7 +234,7 @@ curl --location --request GET "http://underification.lo/pointScales" \
 
 
 
-`POST` `http://underification.lo/badges`
+**`POST`** `/badges`
 
 Create a new badge for a given application
 
@@ -272,7 +272,7 @@ The given authentication token isn't valid.
 ```bash
 curl --location --request POST 'http://underification.lo/badges' \
 --header 'Content-Type: application/json' \
---header 'X-API-KEY: ELodX6tPk3Lu8vHj2aHdMrkadxWouHbVkorldPPo0IuqGiNyUX' \
+--header 'X-API-KEY: vKlk1qRecW2w6JCPQE2UPyjSdFUCXbSkimGl3nPFHFgmVvLXp2' \
 --data-raw '{
     "name": "Newbie",
     "description": "Newly created account",
@@ -289,7 +289,7 @@ curl --location --request POST 'http://underification.lo/badges' \
 
 ##### Rules
 
-**`POST`** `http://underification.lo/rules`
+**`POST`** `/rules`
 
 Create a new rule for a given application
 
@@ -354,7 +354,7 @@ curl --location --request POST 'http://underification.lo/rules' \
 
 ##### Events
 
-**`POST`** `http://underification.lo/rules`
+**`POST`** `/rules`
 
 Something happened on the application which triggers one of the rules found in the gamification engine.
 
@@ -386,9 +386,192 @@ The given authentication token isn't valid.
 
 The given eventType doesn't exist.
 
+**Example:**
+
+```bash
+curl --location --request POST '`http://underification.lo/events' \
+--header 'Content-Type: application/json' \
+--header 'X-API-KEY: vKlk1qRecW2w6JCPQE2UPyjSdFUCXbSkimGl3nPFHFgmVvLXp2' \
+--data-raw '{
+    "appUserId": "123",
+    "eventType": "newUser"
+}'
+
+# Response
+```
+
+
+
 ##### Users
 
+**`GET`**` /users/{user}/badges`
+
+Get all the badges earned by a user
+
+**Header:**
+
+| Key          | Value                                       |
+| ------------ | ------------------------------------------- |
+| Content-Type | application/json                            |
+| X-API-KEY    | The authentication token of the application |
+
+**Parameters**
+
+| Name | Type   | Description                                       |
+| ---- | ------ | ------------------------------------------------- |
+| user | String | The ID of the user **managed by the application** |
+
+**Responses**
+
+**`200`** Success
+
+| Parameter   | Type   | Description                       |
+| ----------- | ------ | --------------------------------- |
+| Name        | String | The name of the badge             |
+| Image       | String | A path the the image of the badge |
+| Description | String | A little description of the badge |
+
+> Note: The responses is a list of badges, the above are the fields for a single badge
+
+**`401`** Unauthorized
+
+The given authentication token isn't valid.
+
+**`400`** Bad request
+
+The user doesn't exist.
+
+**Example:**
+
+```bash
+curl --location --request GET 'http://underification.lo/users/123/badges' \
+--header 'Content-Type: application/json' \
+--header 'X-API-KEY: vKlk1qRecW2w6JCPQE2UPyjSdFUCXbSkimGl3nPFHFgmVvLXp2'
+
+# Response
+[
+    {
+        "name": "Newbie",
+        "image": "n/a",
+        "description": "Newly created account"
+    }
+]
+```
+
+
+
+**`GET`**` /users/{user}/scores`
+
+Get all the scores earned by a user for each scale point in which he "participated"
+
+**Header:**
+
+| Key          | Value                                       |
+| ------------ | ------------------------------------------- |
+| Content-Type | application/json                            |
+| X-API-KEY    | The authentication token of the application |
+
+**Parameters**
+
+| Name | Type   | Description                                       |
+| ---- | ------ | ------------------------------------------------- |
+| user | String | The ID of the user **managed by the application** |
+
+**Responses**
+
+**`200`** Success
+
+| Parameter      | Type    | Description                                                 |
+| -------------- | ------- | ----------------------------------------------------------- |
+| pointScaleName | String  | The name of the point scale in which the points were earned |
+| Score          | Integer | The amount of points earned                                 |
+
+> Note: The responses is a list of scores, the above are the fields for a single score
+
+**`401`** Unauthorized
+
+The given authentication token isn't valid.
+
+**`400`** Bad request
+
+The user doesn't exist.
+
+**Example:**
+
+```bash
+curl --location --request GET 'http://underification.lo/users/123/scores' \
+--header 'Content-Type: application/json' \
+--header 'X-API-KEY: vKlk1qRecW2w6JCPQE2UPyjSdFUCXbSkimGl3nPFHFgmVvLXp2'
+
+# Response
+[
+	{
+		"pointScaleName": "Reputation",
+		"score": 1
+	}
+]
+```
+
 ##### Scale points
+
+**`GET`**` /pointScales/{pointScale}/leaderBoard`
+
+Get the leader board for the given point scale
+
+**Header:**
+
+| Key          | Value                                       |
+| ------------ | ------------------------------------------- |
+| Content-Type | application/json                            |
+| X-API-KEY    | The authentication token of the application |
+
+**Parameters**
+
+| Name       | Type    | Description                                                  |
+| ---------- | ------- | ------------------------------------------------------------ |
+| pointScale | String  | The name of the point scale. It corresponds to the name given when creating the scale point |
+| limit      | Integer | The number of users to return in the leader board            |
+
+**Responses:**
+
+**`200`** Success
+
+| Parameter | Type    | Description                    |
+| --------- | ------- | ------------------------------ |
+| appUserId | String  | The ID of the user             |
+| Score     | Integer | The points the user has earned |
+
+> Note: The response is a list of entries in the leader board, the above are the fields for a single entry.
+
+**`401`** Unauthorized
+
+The given authentication token isn't valid.
+
+**`400`** Bad request
+
+The scale point doesn't exist.
+
+**Example:**
+
+```bash
+curl --location --request GET 'http://underification.lo/pointScales/Reputation/leaderBoard?limit=1' \
+--header 'Content-Type: application/json' \
+--header 'X-API-KEY: vKlk1qRecW2w6JCPQE2UPyjSdFUCXbSkimGl3nPFHFgmVvLXp2' \
+--data-raw '{
+    "appUserId": "123",
+    "eventType": "upVoted"
+}'
+
+# Response
+[
+    {
+        "appUserId": "123",
+        "score": 1
+    }
+]
+```
+
+
 
 ## Deployment
 

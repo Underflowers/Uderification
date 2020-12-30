@@ -24,17 +24,331 @@ Here's a tldr of the API documentation if you're too lazy to start it up. You sh
 <img src="https://media.giphy.com/media/vX9WcCiWwUF7G/giphy.gif">
 </p>
 
-The API offers two access points. We could say that they correspond to a `backend` and a `frontend` The first (i.e. the backend) is to let you (or your sysadmin) configure your application within the engine, and the second (i.e. the frontedn) is what your application will be using to access the data stored by the engine or trigger events (little bit on that later).
+The API offers two access points. We could say that they correspond to a `backend` and a `frontend`. The first (i.e. the backend) is to let you (or your sysadmin) configure your application within the engine, and the second (i.e. the frontend) is what your application will be using to access the data stored by the engine or trigger events (little bit on that later).
 
 #### Backend
 
-##### Application
+##### Applications
+
+**`POST`** `http://underification.lo/applications`
+
+Registers the application within the gamification engine.
+
+**Header**:
+
+| Key          | Value            |
+| ------------ | ---------------- |
+| Content-Type | application/json |
+
+**Request body**:
+
+| Parameter   | Type   | Description                             |
+| ----------- | ------ | --------------------------------------- |
+| Name        | String | The name of the application registering |
+| URL         | String | URL of the application                  |
+| Description | String | A little description of the application |
+
+**Responses**:
+
+**`201`** Created
+
+| Key   | Description                                      |
+| ----- | ------------------------------------------------ |
+| token | The authentication token to play with the engine |
+
+**Example:**
+
+```bash
+curl --location --request POST 'http://underification.lo/applications' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "name": "Stack Underflow",
+    "description": "Stack underflow is a Chinese clone of stack overflow.",
+    "url": "flow.io"
+}'
+
+# Response
+{
+	"token":"ELodX6tPk3Lu8vHj2aHdMrkadxWouHbVkorldPPo0IuqGiNyUX"
+}
+```
 
 ##### Badge
 
+**`GET`** `http://underification.lo/badges`
+
+Get all the badges of an application
+
+**Header:**
+
+| Key          | Value                                       |
+| ------------ | ------------------------------------------- |
+| Content-Type | application/json                            |
+| X-API-KEY    | The authentication token of the application |
+
+**Request body:**
+
+N/A
+
+**Responses:**
+
+**`200`** Success
+
+| Parameter   | Type   | Description                       |
+| ----------- | ------ | --------------------------------- |
+| Name        | String | The name of the badge             |
+| Image       | String | A path the the image of the badge |
+| Description | String | A little description of the badge |
+
+> Note: The responses is a list of badges, the above are the fields for a single badge
+
+**`401`** Unauthorized
+
+The given authentication token isn't valid.
+
+**Example:**
+
+```bash
+curl --location --request GET "http://underification.lo/badges" \
+--header 'Content-Type: application/json' \
+--header 'X-API-KEY: ELodX6tPk3Lu8vHj2aHdMrkadxWouHbVkorldPPo0IuqGiNyUX'
+
+# Response
+[
+	{
+		"name": "Newbie",
+		"image": "n/a",
+		"description": "Newly created account"
+	},
+	{
+		"name": "Awesome question",
+		"image": "n/a",
+		"description": "User asked a question that got a lot of upvotes"
+	}
+]
+```
+
+
+
+**`POST`** `http://underification.lo/badges`
+
+Create a new badge for a given application
+
+**Header:**
+
+| Key          | Value                                       |
+| ------------ | ------------------------------------------- |
+| Content-Type | application/json                            |
+| X-API-KEY    | The authentication token of the application |
+
+**Request body:**
+
+| Parameter   | Type   | Description                       |
+| ----------- | ------ | --------------------------------- |
+| Name        | String | The name of the badge             |
+| Image       | String | A path the the image of the badge |
+| Description | String | A little description of the badge |
+
+**Responses:**
+
+**`201`** Created
+
+| Parameter   | Type   | Description                       |
+| ----------- | ------ | --------------------------------- |
+| Name        | String | The name of the badge             |
+| Image       | String | A path the the image of the badge |
+| Description | String | A little description of the badge |
+
+**`401`** Unauthorized
+
+The given authentication token isn't valid.
+
+**Example:**
+
+```bash
+curl --location --request POST 'http://underification.lo/badges' \
+--header 'Content-Type: application/json' \
+--header 'X-API-KEY: ELodX6tPk3Lu8vHj2aHdMrkadxWouHbVkorldPPo0IuqGiNyUX' \
+--data-raw '{
+    "name": "Newbie",
+    "description": "Newly created account",
+    "image": "https://cdn4.iconfinder.com/data/icons/badges-9/66/47-512.png"
+}'
+
+# Response
+{
+	"name": "Newbie",
+	"image": "path/to/image.png",
+	"description": "Newly created account"
+}
+```
+
 ##### Scale points
 
+**`GET`** `http://underification.lo/pointScales`
+
+Get all the point scales of an application
+
+**Header:**
+
+| Key          | Value                                       |
+| ------------ | ------------------------------------------- |
+| Content-Type | application/json                            |
+| X-API-KEY    | The authentication token of the application |
+
+**Request body:**
+
+N/A
+
+**Responses:**
+
+**`200`** Success
+
+| Key  | Description                 |
+| ---- | --------------------------- |
+| name | The name of the point scale |
+
+> Note: The responses is a list of point scales, the above are the fields for a single point scale
+
+**`401`** Unauthorized
+
+The given authentication token isn't valid.
+
+**Example:**
+
+```bash
+curl --location --request GET "http://underification.lo/pointScales" \
+--header 'Content-Type: application/json' \
+--header 'X-API-KEY: ELodX6tPk3Lu8vHj2aHdMrkadxWouHbVkorldPPo0IuqGiNyUX'
+
+# Response
+[
+	{
+		"name": "Reputation"
+	},
+	{
+		"name": "Activity"
+	}
+]
+```
+
+
+
+`POST` `http://underification.lo/badges`
+
+Create a new badge for a given application
+
+**Header:**
+
+| Key          | Value                                       |
+| ------------ | ------------------------------------------- |
+| Content-Type | application/json                            |
+| X-API-KEY    | The authentication token of the application |
+
+**Request body:**
+
+| Parameter   | Type   | Description                       |
+| ----------- | ------ | --------------------------------- |
+| Name        | String | The name of the badge             |
+| Image       | String | A path the the image of the badge |
+| Description | String | A little description of the badge |
+
+**Responses:**
+
+`201`
+
+| Parameter   | Type   | Description                       |
+| ----------- | ------ | --------------------------------- |
+| Name        | String | The name of the badge             |
+| Image       | String | A path the the image of the badge |
+| Description | String | A little description of the badge |
+
+**`401`** Unauthorized
+
+The given authentication token isn't valid.
+
+**Example:**
+
+```bash
+curl --location --request POST 'http://underification.lo/badges' \
+--header 'Content-Type: application/json' \
+--header 'X-API-KEY: ELodX6tPk3Lu8vHj2aHdMrkadxWouHbVkorldPPo0IuqGiNyUX' \
+--data-raw '{
+    "name": "Newbie",
+    "description": "Newly created account",
+    "image": "https://cdn4.iconfinder.com/data/icons/badges-9/66/47-512.png"
+}'
+
+# Response
+{
+	"name": "Newbie",
+	"image": "path/to/image.png",
+	"description": "Newly created account"
+}
+```
+
 ##### Rules
+
+**`POST`** `http://underification.lo/rules`
+
+Create a new rule for a given application
+
+**Header:**
+
+| Key          | Value                                       |
+| ------------ | ------------------------------------------- |
+| Content-Type | application/json                            |
+| X-API-KEY    | The authentication token of the application |
+
+**Request body:**
+| Parameter              | Type    | Description                                                  |
+| ---------------------- | ------- | ------------------------------------------------------------ |
+| eventType              | String  | The name of the event that triggers the rule                 |
+| badgeName (optional)   | String  | The name of the badge to attribute                           |
+| scaleName (optional)   | String  | The name of the scale point under which the points are attributed |
+| scalePoints (optional) | Integer | The amount of points to give                                 |
+> Note: Event tho badgeName, scaleName & scalePoints are optional, you NEED to specify at least one of them!
+>
+> Note 2: scaleName & scalePoints come as a pair, which means if you specify one you need to specify the other.
+
+**Responses:**
+**`201`** Created
+
+| Parameter              | Type    | Description                                                  |
+| ---------------------- | ------- | ------------------------------------------------------------ |
+| eventType              | String  | The name of the event that triggers the rule                 |
+| badgeName (optional)   | String  | The name of the badge to attribute                           |
+| scaleName (optional)   | String  | The name of the scale point under which the points are attributed |
+| scalePoints (optional) | Integer | The amount of points to give                                 |
+
+**`401`** Unauthorized
+
+The given authentication token isn't valid.
+
+**`400`** Bad request
+
+You've forgotten the badge name or the scale point and the points to give.
+
+**Example:**
+```bash
+curl --location --request POST 'http://underification.lo/rules' \
+--header 'Content-Type: application/json' \
+--header 'X-API-KEY: vKlk1qRecW2w6JCPQE2UPyjSdFUCXbSkimGl3nPFHFgmVvLXp2' \
+--data-raw '{
+   "eventType": "newUser",
+   "badgeName": "Newbie",
+   "scaleName": "",
+   "scalePoints": ""
+}'
+
+# Response
+{
+	"eventType": "newUser",
+	"badgeName": "Newbie",
+	"scaleName": "",
+	"scalePoints": null
+}
+```
 
 #### Frontend
 

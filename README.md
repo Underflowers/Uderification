@@ -352,7 +352,39 @@ curl --location --request POST 'http://underification.lo/rules' \
 
 #### Frontend
 
-##### Envents
+##### Events
+
+**`POST`** `http://underification.lo/rules`
+
+Something happened on the application which triggers one of the rules found in the gamification engine.
+
+**Header:**
+
+| Key          | Value                                       |
+| ------------ | ------------------------------------------- |
+| Content-Type | application/json                            |
+| X-API-KEY    | The authentication token of the application |
+
+**Request body**:
+
+| Parameter | Type   | Description                                                  |
+| --------- | ------ | ------------------------------------------------------------ |
+| appUserId | String | The ID of the user **managed by the application**            |
+| eventType | String | The name of the event that was specified when creating a new rule |
+
+**Responses**:
+
+**`201`** Created
+
+The rule was triggered
+
+**`401`** Unauthorized
+
+The given authentication token isn't valid.
+
+**`400`** Bad request
+
+The given eventType doesn't exist.
 
 ##### Users
 

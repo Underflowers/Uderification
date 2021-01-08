@@ -571,15 +571,62 @@ curl --location --request GET 'http://underification.lo/pointScales/Reputation/l
 ]
 ```
 
-
-
 ## Deployment
+
+As for the main project, we've generated (this time willingly) a Docker image that contains the latest version of Underification.
+
+```bash
+$ docker pull ghcr.io/underflowers/underification:latest
+```
+
+Now, all you need to do is to start up a database. Once you have a database running, you need to update [/api-impl/src/main/resources/application.properties](/api-impl/src/main/resources/application.properties) with the database information needed so that Spring Boot can establish a connection with. It should look something like this:
+
+```
+spring.datasource.url=jdbc:mysql://${MYSQL_HOST:localhost}:${MYSQL_PORT:3307}/underification?createDatabaseIfNotExist=true
+spring.datasource.username=${MYSQL_USER:underflower}
+spring.datasource.password=${MYSQL_PASSWORD:securepassword}
+```
+
+To help with this tedious task, we've created a [docker-compose.yml](docker-compose.yml) which starts up a MySQL database and the REST API.
+
+```bash
+$ docker-compose up -d
+```
+
+> Note:  If you decide to use our docker-compose.yml, you'll need to updated  it with the database environment variables. Make sure that in the `application.properties` file you've set the `spring.datasource.url=jdbc:mysql` to **underification_db** (it's the name of the service in the docker-compose.yml), otherwise it  won't work.
+>
+> The paths used in the docker-compose.yml are relative to the project  structure, but if you don't wont to have all of the project locally,  don't forget to update them.
 
 ## Contributing
 
 ### Prerequisites
 
+* Java (v11.0.8)
+* Git (v2.28.0)
+* Docker (v19.03.12-ce)
+* Docker-compose (v1.27.4)
+* Maven (v3.6.3)
+
 ### Project setup
+
+Clone the repository, then startup the database:
+
+```bash
+$ docker-composer up -d underification_db
+```
+
+Now you'll need to setup the database environment variables so the API can connect to it. Simply update it accordingly the application.properties.
+
+> Note: You need to put the same values found in the `docker-compose.yml`.
+
+Now you can start up Spring Boot.
+
+```bash
+$ cd api-impl/
+$ mvn sprint-boot:run 
+```
+
+And voilà :relieved:! You can now access the application at `http://localhost:8080`.
 
 ### Tests
 

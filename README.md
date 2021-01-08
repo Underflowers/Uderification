@@ -630,6 +630,21 @@ And voilà :relieved:! You can now access the application at `http://localhost:8
 
 ### Tests
 
+For the tests, we're using [Cucumber.io](https://cucumber.io/). They can be found in `api-specs/` folder.
+
+Before running the tests, you need to make sure you have a copy of `api-spec.yaml` in `api-specs/src/main/resources/`.
+
+> Note: The file can be found in `api-impl/src/main/resources` but we've created a symlink so it should work.
+
+Now you can run the tests
+
+```bash
+$ cd api-secs/
+$ mvn test
+```
+
+> Note: The Sprint Boot server **NEEDS** to be started!
+
 ## Possible issues
 
 ## Main contributors
@@ -640,60 +655,3 @@ And voilà :relieved:! You can now access the application at `http://localhost:8
 | Loic Dessaules     | gollgot       |
 | Thibaud Franchetti | ChatDeBlofeld |
 | Doran Kayoumi      | kayoumido     |
-
-
-
-# Build and run the Fruit microservice
-
-```
-docker-compose up -d underification_db
-cd fruits-impl/
-mvn spring-boot:run
-```
-
-You can then access:
-
-* the [API documentation](http://localhost:8080/swagger-ui.html), generated from annotations in the code
-* the [API endpoint](http://localhost:8080/), accepting GET and POST requests
-
-You can use curl to invoke the endpoints:
-
-* To retrieve the list of fruits previously created:
-
-```
-curl -X GET --header 'Accept: application/json' 'http://localhost:8080/fruits'
-```
-
-* To create a new fruit (beware that in the live documentation, there are extra \ line separators in the JSON payload that cause issues in some shells)
-
-```
-curl -X POST --header 'Content-Type: application/json' --header 'Accept: */*' -d '{
-  "colour": "red",
-  "expirationDate": "2020-11-06",
-  "expirationDateTime": "2020-11-06T05:43:27.909Z",
-  "kind": "apple",
-  "size": "small",
-  "weight": "light"
-}' 'http://localhost:8080/fruits'
-```
-
-# Test the Fruit microservice by running the executable specification
-
-You can use the Cucumber project to validate the API implementation. Do this when the server is running.
-
-```
-cd cd fruits-specs/
-mvn clean test
-```
-You will see the test results in the console, but you can also open the file located in `./target/cucumber`
-
-# Deployment 
-
-As always and for the rest of our lives, we provide a beautiful handcrafted docker image.
-
-Just run:
-
-`docker-compose up -d`
-
-> Note: You may want to change the database credentials in the compose file for obvious security purposes.
-

@@ -1,5 +1,11 @@
 # Underification
 
+<p align="center">
+  <img src="https://forthebadge.com/images/badges/powered-by-black-magic.svg" alt="platform">
+    <img src="https://forthebadge.com/images/badges/it-works-why.svg" alt="platform">
+    <img src="https://forthebadge.com/images/badges/0-percent-optimized.svg" alt="platform">
+</p>
+
 ## About
 
 Underification is a microservice to help you integrate gamification features to your projects. This means that it **doesn't offer** any form of graphical interface and it should only be used to help you create your own projects.
@@ -644,8 +650,6 @@ $ mvn test
 ```
 
 > Note: The Sprint Boot server **NEEDS** to be started!
-
-## Possible issues
 
 ## Main contributors
 

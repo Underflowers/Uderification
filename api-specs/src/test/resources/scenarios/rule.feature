@@ -8,7 +8,7 @@ Feature: Operations on rules
     Given I have a badge payload
     When I POST the badge payload to the /badges endpoint
 
-    Given I have a point scale payload
+    Given I have a point scale payload named "point_point_scale"
     When I POST the point scale payload to the /pointScales endpoint
 
   Scenario: add a badge rule to an application

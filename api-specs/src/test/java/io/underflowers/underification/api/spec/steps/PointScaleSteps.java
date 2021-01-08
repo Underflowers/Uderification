@@ -29,10 +29,10 @@ public class PointScaleSteps {
         this.api = environment.getApi();
     }
 
-    @Given("^I have a point scale payload$")
-    public void i_have_a_point_scale_payload() throws Throwable {
+    @Given("I have a point scale payload named {string}")
+    public void i_have_a_point_scale_payload(String name) throws Throwable {
         pointScale = new PointScale()
-                .name("test_point_scale_1");
+                .name(name);
     }
 
     @When("^I POST the point scale payload to the /pointScales endpoint$")

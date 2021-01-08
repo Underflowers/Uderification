@@ -21,7 +21,7 @@ mvn sprint-boot:run
 Here's a tldr of the API documentation if you're too lazy to start it up. But know that you should be a shamed of yourself!
 
 <p align="center">
-<img src="https://media.giphy.com/media/vX9WcCiWwUF7G/giphy.gif">
+    <img src="https://media.giphy.com/media/vX9WcCiWwUF7G/giphy.gif">
 </p>
 
 The API offers two access points, we could say that they correspond to a `backend` and a `frontend`. The first (i.e. the backend) is to let you (or your sysadmin) configure your application within the engine, and the second (i.e. the frontend) is what your application will be using to access the data stored by the engine or trigger events (little bit on that later).
@@ -115,16 +115,16 @@ curl --location --request GET "http://underification.lo/badges" \
 
 # Response
 [
-	{
-		"name": "Newbie",
-		"image": "n/a",
-		"description": "Newly created account"
-	},
-	{
-		"name": "Awesome question",
-		"image": "n/a",
-		"description": "User asked a question that got a lot of upvotes"
-	}
+    {
+        "name": "Newbie",
+        "image": "n/a",
+        "description": "Newly created account"
+    },
+    {
+        "name": "Awesome question",
+        "image": "n/a",
+        "description": "User asked a question that got a lot of upvotes"
+    }
 ]
 ```
 
@@ -223,12 +223,12 @@ curl --location --request GET "http://underification.lo/pointScales" \
 
 # Response
 [
-	{
-		"name": "Reputation"
-	},
-	{
-		"name": "Activity"
-	}
+    {
+        "name": "Reputation"
+    },
+    {
+        "name": "Activity"
+    }
 ]
 ```
 
@@ -281,9 +281,9 @@ curl --location --request POST 'http://underification.lo/badges' \
 
 # Response
 {
-	"name": "Newbie",
-	"image": "path/to/image.png",
-	"description": "Newly created account"
+    "name": "Newbie",
+    "image": "path/to/image.png",
+    "description": "Newly created account"
 }
 ```
 
@@ -343,10 +343,10 @@ curl --location --request POST 'http://underification.lo/rules' \
 
 # Response
 {
-	"eventType": "newUser",
-	"badgeName": "Newbie",
-	"scaleName": "",
-	"scalePoints": null
+    "eventType": "newUser",
+    "badgeName": "Newbie",
+    "scaleName": "",
+    "scalePoints": null
 }
 ```
 
@@ -404,7 +404,7 @@ curl --location --request POST '`http://underification.lo/events' \
 
 ##### Users
 
-**`GET`**` /users/{user}/badges`
+**`GET`** `/users/{user}/badges`
 
 Get all the badges earned by a user
 
@@ -460,7 +460,7 @@ curl --location --request GET 'http://underification.lo/users/123/badges' \
 
 
 
-**`GET`**` /users/{user}/scores`
+**`GET`** `/users/{user}/scores`
 
 Get all the scores earned by a user for each scale point in which he "participated"
 
@@ -505,16 +505,16 @@ curl --location --request GET 'http://underification.lo/users/123/scores' \
 
 # Response
 [
-	{
-		"pointScaleName": "Reputation",
-		"score": 1
-	}
+    {
+        "pointScaleName": "Reputation",
+        "score": 1
+    }
 ]
 ```
 
 ##### Scale points
 
-**`GET`**` /pointScales/{pointScale}/leaderBoard`
+**`GET`** `/pointScales/{pointScale}/leaderBoard`
 
 Get the leader board for the given point scale
 

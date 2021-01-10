@@ -3,7 +3,6 @@ services:
   underification_db:
     image: mysql:8.0.21
     container_name: underification_db
-    restart: always
     environment:
       MYSQL_ROOT_PASSWORD: securepassword
       MYSQL_DATABASE: underification
@@ -15,8 +14,7 @@ services:
       - ./docker/init/database/:/docker-entrypoint-initdb.d/
       - underification_db:/var/lib/mysql
 
-
-  underification_api:
+  api:
     image: ghcr.io/underflowers/underification:latest
     container_name: underification
     ports:

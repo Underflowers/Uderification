@@ -44,10 +44,7 @@ jobs:
           registry: ghcr.io
           username: dev-stackunderflow
           password: ${{ secrets.STACKUNDERFLOW_PAT }}
-
-      - name: Prepare build
-        run: ./prepare_build.sh
-      
+          
       - name: Publish to Github packages
         uses: docker/build-push-action@v2
         with:
@@ -55,6 +52,4 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: ghcr.io/underflowers/underification:latest
-          build-args: |
-            DEPENDENCY=./api-impl/target/dependency
 

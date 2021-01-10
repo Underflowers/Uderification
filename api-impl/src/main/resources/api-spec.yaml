@@ -1,8 +1,8 @@
 openapi: '3.0.3'
 info:
   version: '0.1.0'
-  title: Fruits API
-  description: An API to demonstrate Swagger and Spring Boot
+  title: Underification API
+  description: A gamification API to do cool stuff with
 security:
   #  - bearerAuth: []
   - apiKeyAuth: []

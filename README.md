@@ -85,6 +85,10 @@ $ mvn test
 
 > Note: The Sprint Boot server **NEEDS** to be started!
 
+## Documentation
+
+Apart from this readme, you can  find more documents in the [wiki](https://github.com/Underflowers/Underification/wiki) of the project. For the awesome person that will grade us, you can find extra information there (e.g. what we implemented, problems we had etc...).
+
 ## Main contributors
 
 | Name               | Username      |

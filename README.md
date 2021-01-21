@@ -10,17 +10,25 @@
 
 Underification is a microservice to help you integrate gamification features to your projects. This means that it **doesn't offer** any form of graphical interface and it should only be used to help you create your own projects.
 
-## API endpoints
+## Deployment
 
-If you wish to have a documentation of the API, you can build and run the REST API. After doing the followin, the Sprint Boot server will be up and running, listening for connections on port 8080.
+As for the main project, we've generated (this time willingly) a Docker image that contains the latest version of Underification.
+
+Additionaly, we've created a [docker-compose.yml](docker-compose.yml) which starts up a MySQL database and the REST API.
 
 ```bash
-docker-compose up -d underification_db
-cd api-impl/
-mvn sprint-boot:run
+$ docker-compose up -d
 ```
 
-> Note: If you aren't using the mysql container we offer, you'll have to change the configuration in [application.properties](.//api-impl/src/main/resources/application.properties).
+>Note: The paths used in the docker-compose.yml are relative to the project structure, but if you don't wont to have all of the project locally, don't forget to update them.
+>
+> It is recommended to change the database credentials in the compose file.
+
+The server's now listening on `localhost:8080`.
+
+## API endpoints
+
+If you wish to have a documentation of the API, you can run the REST API (see the [deployment section](#deployment)), then the Sprint Boot server will be up and running, listening for connections on port 8080.
 
 If you're too lazy to start it up, you can find a tldr of the API documentation in our [wiki](https://github.com/Underflowers/Underification/wiki/API-Endpoints-TLDR). But know that you should be a shamed of yourself!
 
@@ -28,31 +36,6 @@ If you're too lazy to start it up, you can find a tldr of the API documentation 
     <img src="https://media.giphy.com/media/vX9WcCiWwUF7G/giphy.gif">
 </p>
 
-## Deployment
-
-As for the main project, we've generated (this time willingly) a Docker image that contains the latest version of Underification.
-
-```bash
-$ docker pull ghcr.io/underflowers/underification:latest
-```
-
-Now, all you need to do is to start up a database. Once you have a database running, you need to update [/api-impl/src/main/resources/application.properties](/api-impl/src/main/resources/application.properties) with the database information needed so that Spring Boot can establish a connection with. It should look something like this:
-
-```
-spring.datasource.url=jdbc:mysql://${MYSQL_HOST:localhost}:${MYSQL_PORT:3307}/underification?createDatabaseIfNotExist=true
-spring.datasource.username=${MYSQL_USER:underflower}
-spring.datasource.password=${MYSQL_PASSWORD:securepassword}
-```
-
-To help with this tedious task, we've created a [docker-compose.yml](docker-compose.yml) which starts up a MySQL database and the REST API.
-
-```bash
-$ docker-compose up -d
-```
-
-> Note:  If you decide to use our docker-compose.yml, you'll need to updated  it with the database environment variables. Make sure that in the `application.properties` file you've set the `spring.datasource.url=jdbc:mysql` to **underification_db** (it's the name of the service in the docker-compose.yml), otherwise it  won't work.
->
-> The paths used in the docker-compose.yml are relative to the project  structure, but if you don't wont to have all of the project locally,  don't forget to update them.
 
 ## Contributing
 

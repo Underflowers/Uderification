@@ -52,7 +52,7 @@ If you're too lazy to start it up, you can find a tldr of the API documentation 
 Clone the repository, then startup the database:
 
 ```bash
-$ docker-composer up -d underification_db
+$ docker-compose up -d underification_db
 ```
 
 Now you'll need to setup the database environment variables so the API can connect to it. Simply update it accordingly the application.properties.
@@ -63,7 +63,7 @@ Now you can start up Spring Boot.
 
 ```bash
 $ cd api-impl/
-$ mvn sprint-boot:run 
+$ mvn spring-boot:run 
 ```
 
 And voilà :relieved:! You can now access the application at `http://localhost:8080`.
